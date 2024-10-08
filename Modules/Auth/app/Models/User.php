@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 // use Modules\Auth\Database\Factories\UserFactory;
 
-class user extends Authenticatable
+class User extends Authenticatable
 {
    
 

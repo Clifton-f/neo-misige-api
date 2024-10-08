@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Modules\Auth\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Transformers\UserResource;
+use App\Models\Papel;
+
 
 
 class AuthController extends Controller
@@ -30,6 +32,7 @@ class AuthController extends Controller
     ];
     }
     public function login(Request $request){
+        
         $request->validate([
             "email"=>"|required|email",
             "password"=>"required"
@@ -57,7 +60,7 @@ class AuthController extends Controller
     ];
     }
     public function logout(Request $request){
-        $request -> user()->tokens()->delete();
+        //$request -> user()->tokens()->delete();
         return[
             'message'=>'Logout feito com sucesso'
         ];
