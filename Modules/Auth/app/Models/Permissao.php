@@ -21,3 +21,20 @@ class Permissao extends Model
     }
     
 }
+
+
+README.md
+app/
+artisan
+bootstrap/
+composer.json
+composer.lock
+config/
+database/
+modules_statuses.json
+package.json
+phpunit.xml
+public/
+resources/
+routes/
+storage/ stubs/ tests/ vite-module-loader.js vite.config.js
