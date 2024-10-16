@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Auth\Models;
+namespace Modules\Papel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-// use Modules\Auth\Database\Factories\PapelFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class papel extends Model
+class Papel extends Model
 {
     use HasFactory;
 
@@ -18,9 +18,7 @@ class papel extends Model
     ];
     protected $table = 'papeis';
 
-    public function  permissao():BelongsToMany{
-        return $this->belongsToMany(Permissao::class,'papel_permissao','papel_id','permissao_id');
+    public function  permissao():HasMany{
+        return $this->hasMany(PapelPermissao::class,'papel_id','id');
     }
-    
 }
-
