@@ -25,7 +25,7 @@ Route::prefix('auth')->group(function(){
 });
 
 Route::prefix('papel')->group(function(){
-    Route ::apiResource('/papel', PapelController::class)->middleware('auth:api');
-    Route::apiResource('/permissao',PermissaoController::class)->middleware('auth:api');
+    Route ::apiResource('/papeis', PapelController::class)->middleware('auth:api');
+    Route::apiResource('/permissões',PermissaoController::class)->middleware('auth:api');
     
 });
