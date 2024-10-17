@@ -4,14 +4,14 @@ namespace Modules\Papel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PapelRequest extends FormRequest
+class PapelPermissaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,8 +22,9 @@ class PapelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome'=>['required','unique:papeis'],
-            
+            //
+            'papel_id'=>['bigint(20)','required'],
+            'permissao_id'=>['bigint(20)','required']
         ];
     }
 }

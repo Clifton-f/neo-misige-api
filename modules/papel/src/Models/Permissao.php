@@ -12,6 +12,7 @@ class Permissao extends Model
     //
     use HasFactory;
     protected $table='permissoes';
+    
     protected $fillable = [
         'id',
         'nome',
@@ -21,6 +22,9 @@ class Permissao extends Model
     public function papelPermissao():HasMany{
 
         return $this->hasMany(PapelPermissao::class,'permissao_id','id');
+    }
+    public function papel():BelongsToMany{
+        return $this->belongsToMany(Papel::class,'papel_permissao','permissao_id','papel_id');
     }
     
 

@@ -1,6 +1,6 @@
 <?php
 
-// use Modules\Papel\Http\Controllers\PapelController;
+ use Modules\Papel\Http\Controllers\PapelController;
 
 // Route::get('/papels', [PapelController::class, 'index'])->name('papels.index');
 // Route::get('/papels/create', [PapelController::class, 'create'])->name('papels.create');

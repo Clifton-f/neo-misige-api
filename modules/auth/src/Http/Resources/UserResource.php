@@ -22,6 +22,7 @@ class UserResource extends JsonResource
         $papel = Papel::where('id', $this->papel_id)->with('permissao')->first();
 
         foreach($papel->permissao as $permissao){
+            
             $lista[]=$permissao->nome;
         }
         return $lista;

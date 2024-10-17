@@ -18,7 +18,10 @@ class Papel extends Model
     ];
     protected $table = 'papeis';
 
-    public function  permissao():HasMany{
+    public function  papelPermissao():HasMany{
         return $this->hasMany(PapelPermissao::class,'papel_id','id');
+    }
+    public function permissao():BelongsToMany{
+        return $this->belongsToMany(Permissao::class,'papel_permissao','papel_id','permissao_id');
     }
 }

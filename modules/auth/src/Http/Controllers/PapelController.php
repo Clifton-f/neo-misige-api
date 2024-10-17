@@ -2,9 +2,10 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use App\Http\Requests\StorePapelRequest;
-use App\Http\Requests\UpdatePapelRequest;
+use Modules\Auth\Http\Requests\StorePapelRequest;
+use Modules\Auth\Http\Requests\UpdatePapelRequest;
 use Modules\Auth\Models\Papel;
+use Modules\Papel\Http\Resources\PapelCollection;
 
 class PapelController
 {
@@ -14,6 +15,8 @@ class PapelController
     public function index()
     {
         //
+        $response= new PapelCollection();
+        return $response;
     }
 
     /**
@@ -30,6 +33,7 @@ class PapelController
     public function store(StorePapelRequest $request)
     {
         //
+        return $request;
     }
 
     /**

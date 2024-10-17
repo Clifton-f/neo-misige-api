@@ -2,7 +2,9 @@
 
 namespace Modules\Papel\Tests;
 
-class PapelServiceProviderTest extends TestCase
+class PapelServiceProviderTest //extends TestCase
 {
 	// TODO
+	
+	
 }
