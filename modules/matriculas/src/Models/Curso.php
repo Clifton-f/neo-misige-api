@@ -13,7 +13,8 @@ class Curso extends Model
       "id",
       "nome" ,
       "descricao",
-      "departamento_id"
+      "departamento_id",
+      
     ];
     public function estudante():HasMany{
         return $this->hasMany(Estudante::class,"curso_id","id");

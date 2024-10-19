@@ -11,7 +11,7 @@ class StoreEstudanteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,12 @@ class StoreEstudanteRequest extends FormRequest
     {
         return [
             //
+            'id'=>['required'],
+            'numero'
+
         ];
+    }
+    public function prepareForValidation(){
+        
     }
 }
