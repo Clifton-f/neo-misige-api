@@ -29,3 +29,7 @@ Route::prefix('papel')->group(function(){
     Route::apiResource('/permissões',PermissaoController::class)->middleware('auth:api');
     
 });
+
+Route::prefix('matricula')->group(function(){
+    
+});
