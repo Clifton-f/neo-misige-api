@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6386b9ef948f7e6d96404633e24c7697",
+    "content-hash": "953c312eed990142ed78a5af5a365f32",
     "packages": [
         {
             "name": "brick/math",
@@ -2835,27 +2835,59 @@
             }
         },
         {
-            "name": "modules/docente",
+            "name": "modules/inscricao",
             "version": "1.0",
             "dist": {
                 "type": "path",
-                "url": "modules/docente",
-                "reference": "9a663d57b77d97c9527e4574550b390ff23e942e"
+                "url": "modules/inscricao",
+                "reference": "e5b1898772b1e528a570d8ea7870a066c7396a32"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Modules\\Docente\\Providers\\DocenteServiceProvider"
+                        "Modules\\Inscricao\\Providers\\InscricaoServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Modules\\Docente\\": "src/",
-                    "Modules\\Docente\\Tests\\": "tests/",
-                    "Modules\\Docente\\Database\\Factories\\": "database/factories/",
-                    "Modules\\Docente\\Database\\Seeders\\": "database/seeders/"
+                    "Modules\\Inscricao\\": "src/",
+                    "Modules\\Inscricao\\Tests\\": "tests/",
+                    "Modules\\Inscricao\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Inscricao\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/matriculas",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/matriculas",
+                "reference": "ad163d82f275b792f2955206763df953aa9ef7ae"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Matriculas\\Providers\\MatriculasServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Matriculas\\": "src/",
+                    "Modules\\Matriculas\\Tests\\": "tests/",
+                    "Modules\\Matriculas\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Matriculas\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [
@@ -9500,12 +9532,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

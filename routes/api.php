@@ -38,3 +38,7 @@ Route::prefix('docente')->group(function(){
     Route::get("/notasTurma", [NotaController::class, 'index']);
     //Route::get("/nota/{ano}/{cadeira_id}/{curso_id}/{nome_avaliacao}/{estudante_id}", [NotaController::class, 'show']);
 });
+
+Route::prefix('matricula')->group(function(){
+    
+});

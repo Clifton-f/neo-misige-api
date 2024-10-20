@@ -1,0 +1,24 @@
+{
+	"name": "modules/matriculas",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Matriculas\\": "src/",
+			"Modules\\Matriculas\\Tests\\": "tests/",
+			"Modules\\Matriculas\\Database\\Factories\\": "database/factories/",
+			"Modules\\Matriculas\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Matriculas\\Providers\\MatriculasServiceProvider"
+			]
+		}
+	}
+}

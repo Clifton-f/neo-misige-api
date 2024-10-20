@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function login(){
         $credentials = request(['email','password']);
         if(!$token = auth('api')->attempt($credentials)){
-            return response()->json(['error'=>'Unauthorized'],401);
+            return response()->json(['error'=>'As suas credenciais estão erradas'],404);
         }
         $userResource = new UserResource(User::where('email',request(['email']))->first());
         return response()->json([
