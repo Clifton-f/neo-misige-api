@@ -15,7 +15,7 @@ class Nota extends Model
         "nota"
     ];	
 
-    protected $table = 'avaliacoes_notas'; #TODO nome da tabela foi alterado na ultima versao 
+    protected $table = 'avaliacao_nota'; #TODO nome da tabela foi alterado na ultima versao 
     
     function estudante():BelongsTo {
         return $this->belongsTo(Estdante::class, 'id');
