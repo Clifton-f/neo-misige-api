@@ -11,6 +11,9 @@ use Modules\Papel\Http\Controllers\PermissaoController;
 use Modules\Papel\Http\Resources\PapelResource;
 use Modules\Papel\Models\Papel;
 use Modules\Papel\Tests\PapelServiceProviderTest;
+use Modules\Docente\Http\Controllers\DocenteController;
+use Modules\Docente\Http\Controllers\TurmaController;
+use Modules\Docente\Http\Controllers\NotaController;
 
 Route::prefix('auth')->group(function(){
     Route::apiResource('auth', AuthController::class)->names('auth');
@@ -19,15 +22,21 @@ Route::prefix('auth')->group(function(){
     
     Route::resource('users',UserController::class)->middleware('auth:api');//middleware('auth:api');//->middleware('auth:sanctum');
 
-
-    //Route::post('me',AuthController::class,'me')->middleware('auth:api');
-    
+    //Route::post('me',AuthController::class,'me')->middleware('auth:api');    
 });
 
 Route::prefix('papel')->group(function(){
     Route ::apiResource('/papeis', PapelController::class)->middleware('auth:api');
     Route::apiResource('/permissões',PermissaoController::class)->middleware('auth:api');
     
+});
+
+Route::prefix('docente')->group(function(){
+    Route::apiResource('/docente', DocenteController::class);
+    Route::apiResource('/turma', TurmaController::class);
+    Route::get("/notaEstudante", [NotaController::class, 'show']);
+    Route::get("/notasTurma", [NotaController::class, 'index']);
+    //Route::get("/nota/{ano}/{cadeira_id}/{curso_id}/{nome_avaliacao}/{estudante_id}", [NotaController::class, 'show']);
 });
 
 Route::prefix('matricula')->group(function(){

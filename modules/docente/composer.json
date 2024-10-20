@@ -1,0 +1,24 @@
+{
+	"name": "modules/docente",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Docente\\": "src/",
+			"Modules\\Docente\\Tests\\": "tests/",
+			"Modules\\Docente\\Database\\Factories\\": "database/factories/",
+			"Modules\\Docente\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Docente\\Providers\\DocenteServiceProvider"
+			]
+		}
+	}
+}
