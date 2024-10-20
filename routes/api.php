@@ -34,7 +34,7 @@ Route::prefix('papel')->group(function(){
 Route::prefix('docente')->group(function(){
     Route::apiResource('/docente', DocenteController::class);
     Route::apiResource('/turma', TurmaController::class);
-    Route::get("/nota", [NotaController::class, 'show']);
-    Route::get("/notasAvaliacao", [NotaController::class, 'getAvaliacaoByName']);
+    Route::get("/notaEstudante", [NotaController::class, 'show']);
+    Route::get("/notasTurma", [NotaController::class, 'index']);
     //Route::get("/nota/{ano}/{cadeira_id}/{curso_id}/{nome_avaliacao}/{estudante_id}", [NotaController::class, 'show']);
 });

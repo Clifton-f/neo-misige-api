@@ -9,6 +9,20 @@ use Modules\Docente\Http\Resources\NotaCollection;
 
 class NotaController
 {
+    public function index(Request $request){
+        $nome_avaliacao = $request->input('nomeAvaliacao');
+        $curso_id = $request->input('cursoId');
+        $cadeira_id = $request->input('cadeiraId');
+        $ano = $request->input('ano');
+
+        return new NotaCollection(
+            Nota::where('nome_avaliacao', $nome_avaliacao)
+            ->where('curso_id', $curso_id)
+            ->where('cadeira_id', $cadeira_id)
+            -> where('ano', $ano)->get()
+        );
+    }
+
     public function show(Request $request){
         $nome_avaliacao = $request->input('nomeAvaliacao');
         $curso_id = $request->input('cursoId');
@@ -25,19 +39,6 @@ class NotaController
         );
     }
 
-    public function getAvaliacaoByName(Request $request){
-        $nome_avaliacao = $request->input('nomeAvaliacao');
-        $curso_id = $request->input('cursoId');
-        $cadeira_id = $request->input('cadeiraId');
-        $ano = $request->input('ano');
-
-        return new NotaCollection(
-            Nota::where('nome_avaliacao', $nome_avaliacao)
-            ->where('curso_id', $curso_id)
-            ->where('cadeira_id', $cadeira_id)
-            -> where('ano', $ano)->get()
-        );
-    }
 
     public function update(){
         //
