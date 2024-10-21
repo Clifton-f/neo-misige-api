@@ -5,6 +5,7 @@ namespace Modules\Docente\Http\Controllers;
 use Illuminate\Http\Request;
 use Modules\Docente\Models\Docente;
 use Modules\Docente\Http\Resources\DocenteResource;
+use Modules\Docente\Http\Resources\DocenteCollection;
 class DocenteController
 {
     public function index(){

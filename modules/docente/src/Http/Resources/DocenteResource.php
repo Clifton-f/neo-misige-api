@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Docente\Models\User;
 use Modules\Docente\Models\Docente;
+use Modules\Docente\Models\Turma;
 
 class DocenteResource extends JsonResource
 {
@@ -18,11 +19,22 @@ class DocenteResource extends JsonResource
     
     public function toArray(Request $request): array
     {
-        $user = User::where('id', $this->id)->get();
-        $docente = Docente::where('id', $this->id)->get();
+        $user = User::where('id', $this->id)->first();
+        $turmas = Turma::where('docente_id',id)->get();
+        
         return [
-            $user,
-            $docente
+            'dadosPessoais'=>[
+                'id'=>$user->id,
+            'nome'=>$user->nome,
+            'email'=>$user->email,
+            'BI'=>$user->BI,
+            'NUIT'=>$user->NUIT,
+            'contacto'=>[$user->contacto_1,$user->contacto_1],
+
+            ],
+            "turmas"=
+            
+            
         ];
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Docente\Models\Turma;
 use Modules\Docente\Models\Docente;
 use Modules\Docente\Models\Cadeira;
+use Modules\Docente\Models\User;
 use Modules\Docente\Models\Curso;
 use Illuminate\Support\Facades\DB;
 
