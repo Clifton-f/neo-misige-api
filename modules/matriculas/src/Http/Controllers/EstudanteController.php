@@ -2,6 +2,8 @@
 
 namespace Modules\Matriculas\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
+use Modules\Matriculas\Models\User;
 use Modules\Matriculas\Http\Requests\StoreEstudanteRequest;
 use Modules\Matriculas\Http\Requests\UpdateEstudanteRequest;
 use Modules\Matriculas\Http\Resources\EstudanteResource;
@@ -32,7 +34,30 @@ class EstudanteController
     public function store(StoreEstudanteRequest $request)
     {
         //
-        return new EstudanteResource(Estudante::create($request->all()));
+        $campos = $request->validated();
+        //return $campos;
+
+        $user = User::create([
+        'nome'=>$campos['nome'],
+        'email'=>$campos['email'],
+        'password'=>Hash::make($campos['password']),
+        'BI'=>$campos['BI'],
+        'NUIT'=>$campos['NUIT'],
+        'contacto_1'=>$campos['contacto_1'],
+        'contacto_2'=>$campos['contacto_2'],
+        'papel_id'=>$campos['papel_id']
+        ]);
+
+        
+
+        $estudante = Estudante::create([
+            "id"=>$user->id,
+            "curso_id"=>$campos['curso_id'],
+            "data_entrada"=>$campos['data_entrada'],
+            "numero_estudante"=>$campos["numero_estudante"]
+        ]);
+        
+        return new EstudanteResource($estudante);
     }
 
     /**
@@ -41,6 +66,7 @@ class EstudanteController
     public function show(Estudante $estudante)
     {
         //
+        return new EstudanteResource($estudante);
     }
 
     /**

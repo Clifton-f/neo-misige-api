@@ -6,6 +6,11 @@ use Modules\Auth\Http\Controllers\AuthController;
 //use Modules\Papel\Http\Controllers\PapelController;
 use Modules\Papel\Http\Controllers\PapelController;
 use Modules\Auth\Http\Controllers\UserController;
+use Modules\Matriculas\Http\Controllers\CursoController;
+use Modules\Matriculas\Http\Controllers\EstudanteController;
+use Modules\Matriculas\Http\Resources\CadeiraResource;
+use Modules\Matriculas\Models\Cadeira;
+use Modules\Matriculas\Models\Estudante;
 use Modules\Papel\Http\Controllers\PapelPermissaoController;
 use Modules\Papel\Http\Controllers\PermissaoController;
 use Modules\Papel\Http\Resources\PapelResource;
@@ -31,5 +36,9 @@ Route::prefix('papel')->group(function(){
 });
 
 Route::prefix('matricula')->group(function(){
-    
+    Route::apiResource('curso',CursoController::class);
+    Route::get('cadeira',function(){
+        return new CadeiraResource(Cadeira::where('id',21)->first());
+    });
+    Route::apiResource('/estudante',EstudanteController::class);
 });

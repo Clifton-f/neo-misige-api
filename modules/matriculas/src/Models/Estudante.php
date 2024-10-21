@@ -10,15 +10,16 @@ class Estudante extends Model
     //
     protected $table="estudantes";
     protected $fillable=[
+        'id',
         "numero_estudante",
-        "ano_entrada",
-      "ano_saida",
+        "data_entrada",
+      "data_saida",
       "curso_id"
     ];
     public function curso(){
         return $this->belongsTo(Curso::class,"curso_id","id");
     }
     public function user():BelongsTo{
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'id','id');
     }
 }

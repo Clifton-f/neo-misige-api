@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Matriculas\Http\Requests;
+namespace Modules\Avaliacoes\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCursoRequest extends FormRequest
+class StoreAvaliacaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,22 +22,25 @@ class StoreCursoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nome"=>"required",
-            "duracao_minima"=>"required",
-            "duracao_maxima"=>"required",
-            "departamento_id"=>"required"
+            //
+            'curso_id'=>'required',
+            'cadeira_id'=>'required',
+            'nome_avaliacao'=>'required',
+            'peso'=>'required'
+
         ];
     }
-
     protected function prepareForValidation()
     {
-            
+        $ano=
+        
         $this->merge([
-         
-            'departamento_id'=> $this->departamentoId,
-            'duracao_maxima'=>$this->duracaoMaxima,
-            'duracao_minima'=>$this->duracaoMinima
+            "curso_id"=>'cursoId',
+            'cadeira_id'=>'cadeiraId',
+            'nome_avaliacao'=>'nomeAvaliacao',
+            "ano"=>gmdate("Y")
             
-            ]);
-        }
+
+        ]);
+    }
 }

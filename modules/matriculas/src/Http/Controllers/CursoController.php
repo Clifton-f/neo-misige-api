@@ -4,6 +4,8 @@ namespace Modules\Matriculas\Http\Controllers;
 
 use Modules\Matriculas\Http\Requests\StoreCursoRequest;
 use Modules\Matriculas\Http\Requests\UpdateCursoRequest;
+use Modules\Matriculas\Http\Resources\CursoCollection;
+use Modules\Matriculas\Http\Resources\CursoResource;
 use Modules\Matriculas\Models\Curso;
 
 class CursoController
@@ -13,7 +15,7 @@ class CursoController
      */
     public function index()
     {
-        //
+        return new CursoCollection(Curso::all());
     }
 
     /**
@@ -30,6 +32,8 @@ class CursoController
     public function store(StoreCursoRequest $request)
     {
         //
+        $curso = Curso::create($request->all());
+        return new CursoResource($curso);
     }
 
     /**
@@ -38,6 +42,8 @@ class CursoController
     public function show(Curso $curso)
     {
         //
+        $cursoResource =new CursoResource($curso);
+        return $cursoResource->cursoByID();
     }
 
     /**

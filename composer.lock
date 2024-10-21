@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "953c312eed990142ed78a5af5a365f32",
+    "content-hash": "7b6dc7166fc626c38c59b2f2b447907c",
     "packages": [
         {
             "name": "brick/math",
@@ -2822,6 +2822,70 @@
                     "Modules\\Auth\\Tests\\": "tests/",
                     "Modules\\Auth\\Database\\Factories\\": "database/factories/",
                     "Modules\\Auth\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/avaliacoes",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/avaliacoes",
+                "reference": "9bbefb4e46d058ac48a6535a4df0f9a281fdaab8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Avaliacoes\\Providers\\AvaliacoesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Avaliacoes\\": "src/",
+                    "Modules\\Avaliacoes\\Tests\\": "tests/",
+                    "Modules\\Avaliacoes\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Avaliacoes\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/cursos",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/cursos",
+                "reference": "9b1acf9f658a771b18b015376efa11a6e84a0e1f"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Cursos\\Providers\\CursosServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Cursos\\": "src/",
+                    "Modules\\Cursos\\Tests\\": "tests/",
+                    "Modules\\Cursos\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Cursos\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [

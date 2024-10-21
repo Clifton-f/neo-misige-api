@@ -17,9 +17,10 @@ class EstudanteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'dadosPessoais'=>new UserResource(User::where('id',$this->id)),
+            'dadosPessoais'=>new UserResource(User::where('id',$this->id)->first()),
         
             'dadosMatricula'=>[
+                
                 'numeroEstudante'=>$this->numero_estudante,
                 'cursoId'=>$this->curso_id,
                 'dataEntrada'=>$this->data_entrada

@@ -5,6 +5,7 @@ namespace Modules\Matriculas\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
+use Modules\Matriculas\Models\Catalogo;
 
 class CursoResource extends JsonResource
 {
@@ -27,12 +28,14 @@ class CursoResource extends JsonResource
         ];
     }
     public function cursoByID():array{
+        $catalogo = Catalogo::where('curso_id',3)->get();
         return[
             'id'=>$this->id,
             'nome'=>$this->nome,
             'descricao'=>$this->descricao,
             'duracaoMinima'=>$this->duracao_minima,
-            'duracaoMaxima'=>$this->duracao_maxima
+            'duracaoMaxima'=>$this->duracao_maxima,
+            'cadeiras'=>new CatalogoCollection($catalogo)
         ];
     }
 }

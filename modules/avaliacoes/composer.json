@@ -1,0 +1,24 @@
+{
+	"name": "modules/avaliacoes",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Avaliacoes\\": "src/",
+			"Modules\\Avaliacoes\\Tests\\": "tests/",
+			"Modules\\Avaliacoes\\Database\\Factories\\": "database/factories/",
+			"Modules\\Avaliacoes\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Avaliacoes\\Providers\\AvaliacoesServiceProvider"
+			]
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"name": "modules/cursos",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Cursos\\": "src/",
+			"Modules\\Cursos\\Tests\\": "tests/",
+			"Modules\\Cursos\\Database\\Factories\\": "database/factories/",
+			"Modules\\Cursos\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Cursos\\Providers\\CursosServiceProvider"
+			]
+		}
+	}
+}
