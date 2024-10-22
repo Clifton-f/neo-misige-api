@@ -47,7 +47,7 @@ class StoreEstudanteRequest extends FormRequest
             
         $this->merge([
          
-            'papel_id'=> $this->papelId,
+            
             'contacto_1'=>$this->contacto1,
             'contacto_2'=>$this->contacto2,
             "curso_id"=>$this->cursoId,

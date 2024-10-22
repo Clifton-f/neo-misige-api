@@ -22,6 +22,8 @@ class StorePermissaoRequest extends FormRequest
     public function rules(): array
     {
        return[
+        'nome'=>['required','unique:permissoes'],
+        'descricao'=>['sometimes']
 
        ];
     }

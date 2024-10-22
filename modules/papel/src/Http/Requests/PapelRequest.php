@@ -23,7 +23,10 @@ class PapelRequest extends FormRequest
     {
         return [
             'nome'=>['required','unique:papeis'],
+            'descricao'=>['sometimes'],
+            'permissoes'=>['required']
             
         ];
+        
     }
 }

@@ -23,10 +23,11 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
     {
         return [
             //
-            'curso_id'=>'required',
-            'cadeira_id'=>'required',
-            'nome_avaliacao'=>'required',
-            'peso'=>'required'
+            'curso_id'=>['required'],
+            'cadeira_id'=>['required'],
+            'nome_avaliacao'=>['required'],
+            'peso'=>['required'],
+            'ano'=>['required']
 
         ];
     }
@@ -38,7 +39,7 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
             "curso_id"=>'cursoId',
             'cadeira_id'=>'cadeiraId',
             'nome_avaliacao'=>'nomeAvaliacao',
-            "ano"=>gmdate("Y")
+            
             
 
         ]);

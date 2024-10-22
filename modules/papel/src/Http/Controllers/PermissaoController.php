@@ -33,7 +33,9 @@ class PermissaoController
     public function store(StorePermissaoRequest $request)
     {
         //
-        return Permissao::create($request);
+        $campos = $request->validated();
+
+        return Permissao::create($campos);
 
 
     }
@@ -62,7 +64,9 @@ class PermissaoController
     public function update(PermissaoRequest $request, $id)
     {
         //
-        $permissao=Permissao::where('id',$id)->update([$request]);
+
+        $permissao=Permissao::where('id',$id)->get();
+        $permissao;
         
         return new PermissaoResource($permissao->get());
     }

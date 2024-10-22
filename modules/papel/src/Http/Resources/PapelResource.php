@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Papel\Models\Papel;
 use Modules\Papel\Models\Permissao;
 use Modules\Papel\Http\Resources\PermissaoCollection;
+use Modules\Papel\Models\PapelPermissao;
 
 class PapelResource extends JsonResource
 {
@@ -16,23 +17,24 @@ class PapelResource extends JsonResource
      * @return array<string, mixed>
      */
 
-     protected function getPermissoes() :array{
-        $lista = [];
-        $papel = Papel::where('id', $this->id)->with('permissao')->first();
-
-        foreach($papel->permissao as $permissao){
-            $lista[]=$permissao->nome;
-        }
-        return $lista;
-     }
+     
     public function toArray(Request $request): array
     {
-        $permissoes = PapelResource::getPermissoes();
+        $lista = [];
+        $permissoes = PapelPermissao::where('papel_id', $this->id)->with('permissao')->get();
+
+        
+        foreach($permissoes as $uniao){
+            
+            $lista[]=$uniao->permissao->nome;
+        }
+        
+        
         return [
             'id' => $this->id,
             'nome' =>$this->nome,
             'descricao' => $this->descricao,
-            'permissoes'=>$permissoes
+            'permissoes'=>$lista
         ];
     }
 }

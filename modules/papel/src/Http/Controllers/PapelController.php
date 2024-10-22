@@ -18,14 +18,16 @@ class PapelController extends Controller
     }
     public function store(PapelRequest $request){
 
+        $campos = $request->validated();
        $papel=Papel::create([
-            "nome"=>$request->input('nome'),
-            "descricao"=>$request->input('descricao')
+            "nome"=>$campos['nome'],
+            "descricao"=>$campos['descricao']
         ]);
-        $permissoes = $request->input("permissoes");
+        $permissoes = $campos['permissoes'];
         $papelPermissao=[];
 
-        foreach($permissoes as $permissao){
+        foreach($campos['permissoes'] as $permissao){
+            
         $papelPermissao[]=PapelPermissao::create([
             "papel_id"=>$papel->id,
             "permissao_id"=>$permissao
@@ -36,10 +38,11 @@ class PapelController extends Controller
 
     }
     public function update(){
-        //return new PapelResource(Papel)
+        //return new PapelResource($Papel);
     }
-    public function show(Papel $papel){
-        return new PapelResource($papel);
+    public function show(int $id){
+        //return Papel::where('id',$id)->first();
+        return new PapelResource(Papel::where('id',$id)->first());
     }
     public function destroy(Papel $papel){
         return Papel::where('id',$papel->id)->delete();

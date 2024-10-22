@@ -58,7 +58,10 @@ class AvaliacaoNotaController
         $avaliacaoNota=AvaliacaoNota::where('cadeira_id',$campos['cadeira_id'])
         ->where('curso_id',$campos['curso_id'])
         ->where('nome_avaliacao',$campos['nome_avaliacao'])
-        ->where('estudante_id',$campos['estudante_id']);
+        ->where('estudante_id',$campos['estudante_id'])->where('ano',gmdate('Y'));
+        $avaliacaoNota->nota=$campos['nota'];
+        $avaliacaoNota->save();
+        
     }
 
     /**

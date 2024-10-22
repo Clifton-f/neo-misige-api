@@ -2,9 +2,12 @@
 
 namespace Modules\Papel\Http\Controllers;
 
-use App\Http\Requests\StorePapelPermissaoRequest;
-use App\Http\Requests\UpdatePapelPermissaoRequest;
+use Modules\Papel\Http\Resources\PapelResource;
+use Modules\Papel\Http\Requests\PapelPermissaoRequest;
+use Modules\Papel\Http\Requests\UpdatePapelPermissaoRequest;
+
 use Modules\Papel\Models\PapelPermissao;
+use Modules\Papel\Models\Papel;
 
 class PapelPermissaoController
 {
@@ -27,9 +30,24 @@ class PapelPermissaoController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePapelPermissaoRequest $request)
+    public function store(PapelPermissaoRequest $request)
     {
         //
+        $campos=$request->validated();
+        $papel=Papel::where('id',$campos['papel_id'])->first();
+        return new PapelResource($papel);
+        
+        foreach($campos['permissoes'] as $permissao){
+            PapelPermissao::create([
+                'papel_id'=>$campos['papel_id'],
+                'permissao_id'=>$permissao
+            ]);
+
+            
+            
+        }
+        return new PapelResource($papel);
+        
     }
 
     /**
@@ -59,7 +77,7 @@ class PapelPermissaoController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PapelPermissao $papelPermissao)
+    public function destroy( $papelPermissao)
     {
         //
     }

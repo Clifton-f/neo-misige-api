@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Papel extends Model
 {
     use HasFactory;
+    protected $primaryKey='id';
 
     protected $fillable = [
         'id',

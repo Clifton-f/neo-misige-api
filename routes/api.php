@@ -31,8 +31,10 @@ Route::prefix('auth')->group(function(){
 });
 
 Route::prefix('papel')->group(function(){
+    Route::post('login',[AuthController::class, 'login']);
     Route ::apiResource('/papeis', PapelController::class)->middleware('auth:api');
     Route::apiResource('/permissões',PermissaoController::class)->middleware('auth:api');
+    Route::post('/addpermissoes',[PapelPermissaoController::class,'store']);
     
 });
 

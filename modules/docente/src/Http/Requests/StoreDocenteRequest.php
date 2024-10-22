@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Papel\Http\Requests;
+namespace Modules\Docente\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PapelPermissaoRequest extends FormRequest
+class StoreDocenteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,20 +23,6 @@ class PapelPermissaoRequest extends FormRequest
     {
         return [
             //
-            'papel_id'=>['required'],
-            'permissoes'=>['required']
-            
         ];
-
     }
-
-    protected function prepareForValidation()
-    {
-            
-        $this->merge([
-         
-            'papel_id'=> $this->papelId,
-            
-            ]);
-        }
 }
