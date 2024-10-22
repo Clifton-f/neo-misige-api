@@ -2897,6 +2897,38 @@
             }
         },
         {
+            "name": "modules/docente",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/docente",
+                "reference": "9a663d57b77d97c9527e4574550b390ff23e942e"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Docente\\Providers\\DocenteServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Docente\\": "src/",
+                    "Modules\\Docente\\Tests\\": "tests/",
+                    "Modules\\Docente\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Docente\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "modules/inscricao",
             "version": "1.0",
             "dist": {

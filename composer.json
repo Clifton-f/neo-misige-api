@@ -16,6 +16,7 @@
         "modules/auth": "*",
         "modules/avaliacoes": "*",
         "modules/cursos": "*",
+        "modules/docente": "*",
         "modules/inscricao": "*",
         "modules/matriculas": "*",
         "modules/papel": "*",
