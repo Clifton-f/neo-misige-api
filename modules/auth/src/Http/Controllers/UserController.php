@@ -28,8 +28,8 @@ class UserController
     }
     public function store(UserRequest $request){
         
-
-            return new UserResource(User::create($request->all()));
+        $user = User::create($request->all());
+            return new UserResource($user);
     }
 
 

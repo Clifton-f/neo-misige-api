@@ -33,7 +33,7 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
     }
     protected function prepareForValidation()
     {
-        $ano=
+        
         
         $this->merge([
             "curso_id"=>'cursoId',
