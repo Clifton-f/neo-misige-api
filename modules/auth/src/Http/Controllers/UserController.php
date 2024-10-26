@@ -23,7 +23,7 @@ class UserController
     public function show(User $user){
 $resource=new UserResource($user);
         
-        return $resource;
+        return $resource->getUser();
         
     }
     public function store(UserRequest $request){

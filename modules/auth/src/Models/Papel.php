@@ -21,6 +21,8 @@ class papel extends Model
     public function  permissao():BelongsToMany{
         return $this->belongsToMany(Permissao::class,'papel_permissao','papel_id','permissao_id');
     }
-    
+    public function user():BelongsToMany{
+        return $this->belongsToMany(User::class,'user_id','papel_id');
+    }
 }
 
