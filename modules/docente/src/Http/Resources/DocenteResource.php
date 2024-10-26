@@ -19,22 +19,21 @@ class DocenteResource extends JsonResource
     
     public function toArray(Request $request): array
     {
-        $user = User::where('id', $this->id)->first();
-        $turmas = Turma::where('docente_id',$this->id)->get();
+        $user = User::where('id',$this->id)->first();
+        $turmas=Turma::where('regente_id',$this->id)->get();
         
+
         return [
             'dadosPessoais'=>[
-            'id'=>$user->id,
+            'id'=>$this->id,
             'nome'=>$user->nome,
             'email'=>$user->email,
             'BI'=>$user->BI,
             'NUIT'=>$user->NUIT,
             'contacto'=>[$user->contacto_1,$user->contacto_1],
-
             ],
-            "turmas"=>new TurmaCollection($turmas)
-            
-            
+              'turma'=> new TurmaCollection($turmas)
+
         ];
-    }
+}
 }

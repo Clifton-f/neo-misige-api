@@ -17,8 +17,8 @@ class Estudante extends Model
         'data_saida'
     ];
     
-    function user(): BelongsTo {
-        return $this->belongsTo(User::class, 'id');
-    }
+    //function user(): BelongsTo {
+    //    return $this->belongsTo(User::class, 'id');
+    //}
 }
 

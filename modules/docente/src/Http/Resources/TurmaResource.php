@@ -4,12 +4,13 @@ namespace Modules\Docente\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Docente\Models\Turma;
-use Modules\Docente\Models\Docente;
+
+
 use Modules\Docente\Models\Cadeira;
-use Modules\Docente\Models\User;
+
 use Modules\Docente\Models\Curso;
 use Illuminate\Support\Facades\DB;
+
 
 
 class TurmaResource extends JsonResource
@@ -24,7 +25,7 @@ class TurmaResource extends JsonResource
     public function toArray(Request $request): array
     {
         $cadeira = Cadeira::where('id', $this->cadeira_id)->first();
-     $regente = Docente::where('id', $this->regente_id)->with(User::class)->first();
+     //$regente = Docente::where('id', $this->regente_id)->with(User::class)->first();
      $curso = Curso::where('id', $this->curso_id)->first();      
 
      $estudantes = DB::table('estudantes')->join('users', 'estudantes.id', '=', 'users.id')
@@ -43,6 +44,7 @@ class TurmaResource extends JsonResource
             'cursoId' => $curso->id,
             'cursoNome' => $curso->nome,
             ],
+            'ano'=>$this->ano,
          ];
 
     }
@@ -50,7 +52,7 @@ class TurmaResource extends JsonResource
     public function getTurma(){
         
         $cadeira = Cadeira::where('id', $this->cadeira_id)->first();
-     $regente = Docente::where('id', $this->regente_id)->with(User::class)->first();
+     $//regente = Docente::where('id', $this->regente_id)->with(User::class)->first();
      $curso = Curso::where('id', $this->curso_id)->first();      
 
      $estudantes = DB::table('estudantes')->join('users', 'estudantes.id', '=', 'users.id')
