@@ -21,9 +21,9 @@ class UserController
      * Show the form for creating a new resource.
      */
     public function show(User $user){
-
+$resource=new UserResource($user);
         
-        return new UserResource($user);
+        return $resource;
         
     }
     public function store(UserRequest $request){

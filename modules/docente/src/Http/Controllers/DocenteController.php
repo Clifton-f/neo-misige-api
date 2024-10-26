@@ -32,9 +32,9 @@ class DocenteController
         'papel_id'=>$campos['papel_id']
         ]);
 
-        
 
-        
+
+
         $docente = Docente::create([
             "id"=>$user->id,
             "formacao"=>$campos['formacao']
@@ -46,7 +46,8 @@ class DocenteController
         //return new PapelResource(Papel)
     }
     public function show(Docente $docente){
-        return new DocenteResource($docente);
+        $resource = new DocenteResource($docente);
+        return $resource->getDocente();
     }
     public function destroy(Docente $docente){
         return Docente::where('id' ,$docente->id)->delete();

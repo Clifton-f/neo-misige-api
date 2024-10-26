@@ -24,10 +24,10 @@ Route::prefix('auth')->group(function(){
     Route::apiResource('auth', AuthController::class)->names('auth');
     Route::post('login',[AuthController::class, 'login']);
     Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:api');
-    
+
     Route::resource('users',UserController::class)->middleware('auth:api');//middleware('auth:api');//->middleware('auth:sanctum');
 
-    //Route::post('me',AuthController::class,'me')->middleware('auth:api');    
+    //Route::post('me',AuthController::class,'me')->middleware('auth:api');
 });
 
 Route::prefix('papel')->group(function(){
@@ -35,11 +35,11 @@ Route::prefix('papel')->group(function(){
     Route ::apiResource('/papeis', PapelController::class)->middleware('auth:api');
     Route::apiResource('/permissões',PermissaoController::class)->middleware('auth:api');
     Route::post('/addpermissoes',[PapelPermissaoController::class,'store']);
-    
+
 });
 
 Route::prefix('docente')->group(function(){
-    Route::apiResource('/docente', DocenteController::class);
+    Route::apiResource('/docentes', DocenteController::class);
     Route::apiResource('/turma', TurmaController::class);
     Route::get("/notaEstudante", [NotaController::class, 'show']);
     Route::get("/notasTurma", [NotaController::class, 'index']);

@@ -2,8 +2,10 @@
 
 namespace Modules\Auth\Http\Resources;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use Modules\Auth\Http\Resources\PapelResource;
 use Modules\Auth\Http\Resources\PermissaoResource;
 use Modules\Auth\Models\Papel;
@@ -17,7 +19,10 @@ class UserResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function getPermissoes() :array{
+    public function getPermissoes(){
+        
+        /*$permissoes = DB::table('permissoes')->join('papel_permissao','papel_permissao.papel_id','=','permissoes.id')
+        ->join('papeis','papeis.id','=','papel_permissao.papel_id')->get();*/
         $lista = [];
         $papel = Papel::where('id', $this->papel_id)->with('permissao')->first();
 
@@ -30,6 +35,7 @@ class UserResource extends JsonResource
 
     public function toArray(Request $request): array
     {
+        
         return [
             'dadosPessoais'=>[
             'id'=>$this->id,
@@ -41,8 +47,8 @@ class UserResource extends JsonResource
 
             ],
             'papel' => new PapelResource(Papel::where('id',$this->papel_id)->first()),
-            'permissoes'=> UserResource::getPermissoes(User::where('id',$this->id)->first())//Papel::where('id', $this->papel_id)->with('permissao')->first()UserResource::getPermissoes()
-
+            //'permissoes'=> UserResource::getPermissoes(User::where('id',$this->id)->first())//Papel::where('id', $this->papel_id)->with('permissao')->first()UserResource::getPermissoes()
+            'permissao'=>UserResource::getPermissoes(User::where('id',$this->id)->first())
         ];
         
     }

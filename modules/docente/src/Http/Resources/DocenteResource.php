@@ -16,12 +16,12 @@ class DocenteResource extends JsonResource
      * @return array<string, mixed>
      */
 
-    
+
     public function toArray(Request $request): array
     {
         $user = User::where('id',$this->id)->first();
         $turmas=Turma::where('regente_id',$this->id)->get();
-        
+
 
         return [
             'dadosPessoais'=>[
@@ -32,8 +32,28 @@ class DocenteResource extends JsonResource
             'NUIT'=>$user->NUIT,
             'contacto'=>[$user->contacto_1,$user->contacto_1],
             ],
-              'turma'=> new TurmaCollection($turmas)
+            'formacao'=>$this->formacao
+
 
         ];
+}
+public function getDocente()
+{
+    $user = User::where('id',$this->id)->first();
+    $turmas=Turma::where('regente_id',$this->id)->get();
+
+
+    return [
+        'dadosPessoais'=>[
+            'id'=>$this->id,
+            'nome'=>$user->nome,
+            'email'=>$user->email,
+            'BI'=>$user->BI,
+            'NUIT'=>$user->NUIT,
+            'contacto'=>[$user->contacto_1,$user->contacto_1],
+        ],
+        'turma'=> new TurmaCollection($turmas)
+
+    ];
 }
 }
