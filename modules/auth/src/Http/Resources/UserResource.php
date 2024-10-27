@@ -13,6 +13,8 @@ use Modules\Auth\Models\Papel;
 use Modules\Auth\Models\Permissao;
 use Modules\Auth\Models\User;
 use Modules\Auth\Http\Resources\PapelCollection;
+use Modules\Auth\Models\UserPapel;
+use Modules\Papel\Http\Resources\PermissaoCollection;
 
 class UserResource extends JsonResource
 {
@@ -43,14 +45,26 @@ class UserResource extends JsonResource
     }
 
     public function getUser():array{
-        $papeis = DB::table('user_papel')->join('papeis','user_papel.papel_id','=','papeis.id')->select('user_papel.papel_id as id','papeis.nome as nome')->where('user_id',$this->id)->get();
-        $permissoes=[];
-        foreach($papeis as $papel){
-            $permissoes[] = DB::table('papel_permissao')
-        ->join('permissoes','papel_permissao.permissao_id','=','permissoes.id')
-        ->join('papeis','papel_permissao.papel_id','=','papeis.id')
-        ->select('permissoes.nome as permissao', 'permissoes.categoria as categoria')->where('papel_permissao.papel_id','=',$papel->id)->get();
-        }
+
+
+        $papeis = DB::table('user_papel')
+            ->join('papeis', 'user_papel.papel_id', '=', 'papeis.id')
+            ->where('user_papel.user_id', $this->id)
+            ->pluck('papeis.nome')
+            ->toArray();
+
+        $permissoes = DB::table('papel_permissao')
+            ->join('permissoes', 'papel_permissao.permissao_id', '=', 'permissoes.id')
+            ->join('user_papel', 'papel_permissao.papel_id', '=', 'user_papel.papel_id')
+            ->where('user_papel.user_id', $this->id)
+            ->distinct()
+            ->pluck('permissoes.nome')
+            ->toArray();
+
+        return [
+            'papeis' => $papeis,
+            'permissoes' => $permissoes,
+        ];
         return[
             'dadosPessoais'=>[
                 'id'=>$this->id,
@@ -62,7 +76,7 @@ class UserResource extends JsonResource
 
                 ],
                 'papeis' => $papeis,
-                'permissao'=>$permissoes
+                'permissao'=>$permissoes,
 
         ];
     }

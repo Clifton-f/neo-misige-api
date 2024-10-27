@@ -5,6 +5,7 @@ namespace Modules\Auth\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -64,4 +65,9 @@ protected $table='users';
         return $this->belongsToMany(Papel::class,'user_papel','user_id','papel_id');
     }
 
+    public function userPapel():HasMany
+    {
+        return $this->hasMany(UserPapel::class,'user_id','id');
+
+    }
 }

@@ -54,15 +54,4 @@ Route::prefix('matricula')->group(function(){
     });
     Route::apiResource('/estudantes',EstudanteController::class);
 });
-Route::get('teste',function(){
-    $papeis = DB::table('user_papel')->select('papel_id')->where('user_id',2)->get();
-    $permissoes = [];
-    foreach($papeis as $papel){
-        $permissoes[] = DB::table('papel_permissao')
-    ->join('permissoes','papel_permissao.permissao_id','=','permissoes.id')
-    ->join('papeis','papel_permissao.papel_id','=','papeis.id')
-    ->select('permissoes.nome as permissao', 'permissoes.categoria as categoria')->where('papel_permissao.papel_id','=','4')->get();
-    }
 
-    return $permissoes;
-});

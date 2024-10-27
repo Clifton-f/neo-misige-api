@@ -38,9 +38,10 @@ class EstudanteController
     public function store(StoreEstudanteRequest $request)
     {
         //
-        $campos = $request->validated();
-        //return $campos;
 
+        $campos = $request->validated();
+
+        //return $campos;
 
         $user = User::create([
         'nome'=>$campos['nome'],
@@ -101,5 +102,6 @@ class EstudanteController
     public function destroy(Estudante $estudante)
     {
         //
+        return $estudante->delete();
     }
 }

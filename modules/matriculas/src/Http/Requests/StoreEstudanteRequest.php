@@ -37,7 +37,9 @@ class StoreEstudanteRequest extends FormRequest
             'numero_estudante'=>['required']
 
         ];
+
     }
+
 
     protected function prepareForValidation()
     {
@@ -59,4 +61,5 @@ class StoreEstudanteRequest extends FormRequest
 
             ]);
         }
+
 }
