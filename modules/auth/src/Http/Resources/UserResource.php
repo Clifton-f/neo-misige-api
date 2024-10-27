@@ -28,6 +28,18 @@ class UserResource extends JsonResource
     public function toArray(Request $request):array
     {
 
+        $papeis = DB::table('user_papel')
+            ->join('papeis', 'user_papel.papel_id', '=', 'papeis.id')
+            ->where('user_papel.user_id', $this->id)
+            ->pluck('papeis.nome')
+            ->toArray();
+        $permissoes = DB::table('papel_permissao')
+            ->join('permissoes', 'papel_permissao.permissao_id', '=', 'permissoes.id')
+            ->join('user_papel', 'papel_permissao.papel_id', '=', 'user_papel.papel_id')
+            ->where('user_papel.user_id', $this->id)
+            ->distinct()
+            ->pluck('permissoes.nome')
+            ->toArray();
 
 
         return [
@@ -38,6 +50,8 @@ class UserResource extends JsonResource
             'BI'=>$this->BI,
             'NUIT'=>$this->NUIT,
             'contacto'=>[$this->contacto_1,$this->contacto_1],
+            "papeis"=>$papeis,
+            'permissao'=>$permissoes,
 
 
         ];
@@ -61,10 +75,7 @@ class UserResource extends JsonResource
             ->pluck('permissoes.nome')
             ->toArray();
 
-        return [
-            'papeis' => $papeis,
-            'permissoes' => $permissoes,
-        ];
+
         return[
             'dadosPessoais'=>[
                 'id'=>$this->id,
