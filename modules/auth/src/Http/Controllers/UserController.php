@@ -8,6 +8,7 @@ use Modules\Auth\Models\User;
 use Modules\Auth\Http\Requests\UserRequest;
 use Modules\Auth\Http\Resources\UserResource;
 use Modules\Auth\Http\Resources\UserCollection;
+use Modules\Auth\Models\UserPapel;
 
 class UserController
 {
@@ -30,7 +31,7 @@ $resource=new UserResource($user);
         $campos = $request->validated();
         $user = User::create($campos);
         foreach ($campos['papel_id'] as $papeis){
-
+            UserPapel::create(["user_id" => $user->id, "papel_id" => $papeis]);
         }
             return new UserResource($user);
     }

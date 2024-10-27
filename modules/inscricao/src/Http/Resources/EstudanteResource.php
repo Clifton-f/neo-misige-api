@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Papel\Http\Resources;
+namespace Modules\Inscricao\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PermissaoResource extends JsonResource
+class EstudanteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class PermissaoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'id'=>$this->id,
-            'nome'=>$this->nome,
-            'descricao'=>$this->descricao,
-            'categoria'=>$this->categoria
-        ];
+        return parent::toArray($request);
     }
 }

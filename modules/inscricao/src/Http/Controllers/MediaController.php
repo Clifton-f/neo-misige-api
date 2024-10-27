@@ -63,4 +63,7 @@ class MediaController
     {
         //
     }
+    public function cadeiras(Media $media){
+
+    }
 }
