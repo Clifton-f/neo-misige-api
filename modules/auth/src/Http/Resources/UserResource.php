@@ -21,15 +21,15 @@ class UserResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-       
+
 
     public function toArray(Request $request):array
     {
-        
-        
-        
+
+
+
         return [
-            
+
             'id'=>$this->id,
             'nome'=>$this->nome,
             'email'=>$this->email,
@@ -37,9 +37,9 @@ class UserResource extends JsonResource
             'NUIT'=>$this->NUIT,
             'contacto'=>[$this->contacto_1,$this->contacto_1],
 
-            
+
         ];
-        
+
     }
 
     public function getUser():array{
@@ -59,10 +59,10 @@ class UserResource extends JsonResource
                 'BI'=>$this->BI,
                 'NUIT'=>$this->NUIT,
                 'contacto'=>[$this->contacto_1,$this->contacto_1],
-    
+
                 ],
                 'papeis' => $papeis,
-                'permissao'=>$permissoes[1]
+                'permissao'=>$permissoes
 
         ];
     }

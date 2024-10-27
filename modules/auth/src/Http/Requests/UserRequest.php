@@ -26,23 +26,24 @@ class UserRequest extends FormRequest
             'email'=>['required','email','unique:users'],
             'BI'=>['required','unique:users'],
             'NUIT'=>['required','unique:users'],
-            'contacto1'=>['required'],
-            'papelId'=>['required','exists:papeis,id'],
+            'contacto_1'=>['required'],
+            'papel_id'=>['required','exists:papeis,id'],
             'password'=>['required'],
-            'passwordConfirm'=>['required','same:password']
-            
+            'passwordConfirm'=>['required','same:password'],
+            'contacto_2'=>['sometimes'],
+
         ];
     }
 
     protected function prepareForValidation()
     {
-            
+
         $this->merge([
-         
+
             'papel_id'=> $this->papelId,
             'contacto_1'=>$this->contacto1,
             'contacto_2'=>$this->contacto2
-            
+
             ]);
         }
 }

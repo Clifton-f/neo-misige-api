@@ -10,6 +10,7 @@ use Modules\Matriculas\Http\Requests\StoreEstudanteRequest;
 use Modules\Matriculas\Http\Requests\UpdateEstudanteRequest;
 use Modules\Matriculas\Http\Resources\EstudanteResource;
 use Modules\Matriculas\Models\Estudante;
+use Modules\Matriculas\Models\UserPapel;
 
 class EstudanteController
 {
@@ -40,6 +41,7 @@ class EstudanteController
         $campos = $request->validated();
         //return $campos;
 
+
         $user = User::create([
         'nome'=>$campos['nome'],
         'email'=>$campos['email'],
@@ -50,10 +52,10 @@ class EstudanteController
         'contacto_2'=>$campos['contacto_2'],
 
         ]);
-
-            DB::table('user_papel')->insert([
-                'user_id'=>$user->id,
-                'papel_id'=>$campos['papel_id']]);
+        $userPapel = UserPapel::create([
+            'user_id'=>$user->id,
+            'papel_id'=>1,
+        ]);
 
 
 
@@ -63,6 +65,7 @@ class EstudanteController
             "data_entrada"=>$campos['data_entrada'],
             "numero_estudante"=>$campos["numero_estudante"]
         ]);
+
 
         return new EstudanteResource($estudante);
     }

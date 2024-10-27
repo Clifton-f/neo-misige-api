@@ -48,7 +48,7 @@ Route::prefix('docente')->group(function(){
 });
 
 Route::prefix('matricula')->group(function(){
-    Route::apiResource('curso',CursoController::class);
+    Route::apiResource('cursos',CursoController::class);
     Route::get('cadeira',function(){
         return new CadeiraResource(Cadeira::where('id',21)->first());
     });
@@ -63,6 +63,6 @@ Route::get('teste',function(){
     ->join('papeis','papel_permissao.papel_id','=','papeis.id')
     ->select('permissoes.nome as permissao', 'permissoes.categoria as categoria')->where('papel_permissao.papel_id','=','4')->get();
     }
-   
+
     return $permissoes;
 });

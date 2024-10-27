@@ -19,9 +19,10 @@ class User extends Authenticatable implements JWTSubject
         'NUIT',
         'contacto_1',
         'contacto_2',
-        
+
 
     ];
+    protected $primaryKey='id';
 protected $table='users';
     /**
      * The attributes that should be hidden for serialization.

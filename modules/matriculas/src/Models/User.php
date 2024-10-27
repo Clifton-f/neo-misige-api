@@ -18,7 +18,6 @@ class User extends Model
         'NUIT',
         'contacto_1',
         'contacto_2',
-        'papel_id'
 
 
     ];

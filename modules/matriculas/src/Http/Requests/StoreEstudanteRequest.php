@@ -35,26 +35,28 @@ class StoreEstudanteRequest extends FormRequest
             'contacto_2'=>['sometimes'],
             'data_entrada'=>['required'],
             'numero_estudante'=>['required']
-            
+
         ];
     }
 
     protected function prepareForValidation()
     {
         $ano = gmdate("Y");
-        $numEstudante = (''.$ano.(Estudante::where('numero_estudante','like',(''.$ano.'%'))->count()+1));
+        $numUsuario="".Estudante::where('numero_estudante','like',(''.$ano.'%'))->count()+1;
+        $numAlgarismo=4-strlen($numUsuario);
+        $numEstudante = (''.$ano.str_repeat('0',$numAlgarismo).$numUsuario);
 
-            
+
         $this->merge([
-         
-            
+
+
             'contacto_1'=>$this->contacto1,
             'contacto_2'=>$this->contacto2,
             "curso_id"=>$this->cursoId,
-            "papel_id"=>1,
+            "papel_id"=>[1],
             "data_entrada"=>gmdate("Y-m-d"),
             "numero_estudante"=>$numEstudante
-            
+
             ]);
         }
 }
