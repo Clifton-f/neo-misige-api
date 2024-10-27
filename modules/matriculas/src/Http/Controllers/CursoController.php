@@ -15,6 +15,7 @@ class CursoController
      */
     public function index()
     {
+        //return new CursoCollection(Curso::all());
         return new CursoCollection(Curso::all());
     }
 
@@ -43,7 +44,7 @@ class CursoController
     {
         //
         $cursoResource =new CursoResource($curso);
-        return $cursoResource->cursoByID();
+        return $cursoResource->getCurso();
     }
 
     /**

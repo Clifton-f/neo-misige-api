@@ -41,7 +41,7 @@ Route::prefix('papel')->group(function(){
 
 Route::prefix('docente')->group(function(){
     Route::apiResource('/docentes', DocenteController::class);
-    Route::apiResource('/turma', TurmaController::class);
+    Route::apiResource('/turmas', TurmaController::class);
     Route::get("/notaEstudante", [NotaController::class, 'show']);
     Route::get("/notasTurma", [NotaController::class, 'index']);
     //Route::get("/nota/{ano}/{cadeira_id}/{curso_id}/{nome_avaliacao}/{estudante_id}", [NotaController::class, 'show']);
@@ -52,7 +52,7 @@ Route::prefix('matricula')->group(function(){
     Route::get('cadeira',function(){
         return new CadeiraResource(Cadeira::where('id',21)->first());
     });
-    Route::apiResource('/estudante',EstudanteController::class);
+    Route::apiResource('/estudantes',EstudanteController::class);
 });
 Route::get('teste',function(){
     $papeis = DB::table('user_papel')->select('papel_id')->where('user_id',2)->get();

@@ -62,7 +62,7 @@ class UserResource extends JsonResource
     
                 ],
                 'papeis' => $papeis,
-                'permissao'=>$permissoes
+                'permissao'=>$permissoes[1]
 
         ];
     }

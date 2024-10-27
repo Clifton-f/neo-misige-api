@@ -15,7 +15,7 @@ class CursoResource extends JsonResource
      * @return array<string, mixed>
      */
 
-     
+
     public function toArray(Request $request): array
     {
         return [
@@ -24,10 +24,10 @@ class CursoResource extends JsonResource
             'descricao'=>$this->descricao,
             'duracaoMinima'=>$this->duracao_minima,
             'duracaoMaxima'=>$this->duracao_maxima
-            
+
         ];
     }
-    public function cursoByID():array{
+    public function getCurso():array{
         $catalogo = Catalogo::where('curso_id',3)->get();
         return[
             'id'=>$this->id,

@@ -2,7 +2,9 @@
 
 namespace Modules\Matriculas\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Modules\Matriculas\Http\Resources\EstudanteCollection;
 use Modules\Matriculas\Models\User;
 use Modules\Matriculas\Http\Requests\StoreEstudanteRequest;
 use Modules\Matriculas\Http\Requests\UpdateEstudanteRequest;
@@ -17,7 +19,8 @@ class EstudanteController
     public function index()
     {
         //
-        
+        return new EstudanteCollection(Estudante::all());
+
     }
 
     /**
@@ -45,10 +48,14 @@ class EstudanteController
         'NUIT'=>$campos['NUIT'],
         'contacto_1'=>$campos['contacto_1'],
         'contacto_2'=>$campos['contacto_2'],
-        'papel_id'=>$campos['papel_id']
+
         ]);
 
-        
+            DB::table('user_papel')->insert([
+                'user_id'=>$user->id,
+                'papel_id'=>$campos['papel_id']]);
+
+
 
         $estudante = Estudante::create([
             "id"=>$user->id,
@@ -56,7 +63,7 @@ class EstudanteController
             "data_entrada"=>$campos['data_entrada'],
             "numero_estudante"=>$campos["numero_estudante"]
         ]);
-        
+
         return new EstudanteResource($estudante);
     }
 

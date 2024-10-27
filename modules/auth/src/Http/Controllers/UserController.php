@@ -27,8 +27,11 @@ $resource=new UserResource($user);
         
     }
     public function store(UserRequest $request){
-        
-        $user = User::create($request->all());
+        $campos = $request->validated();
+        $user = User::create($campos);
+        foreach ($campos['papel_id'] as $papeis){
+            
+        }
             return new UserResource($user);
     }
 

@@ -19,8 +19,7 @@ class User extends Authenticatable implements JWTSubject
         'NUIT',
         'contacto_1',
         'contacto_2',
-        'papel_id'
-
+        
 
     ];
 protected $table='users';

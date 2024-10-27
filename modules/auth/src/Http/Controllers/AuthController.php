@@ -22,13 +22,13 @@ class AuthController extends Controller
         }
         $userResource = new UserResource(User::where('email',request(['email']))->first());
         return response()->json([
-            'user_data'=> $userResource,
+            'user_data'=> $userResource->getUser(),
             'token_data'=>[
                 'token'=>$token,
                 'token_type'=>'bearer',
                 'expires_in' => auth()->factory()->getTTL()*60
             ]
-            
+
             ]);
     }
 
