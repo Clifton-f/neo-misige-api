@@ -27,10 +27,10 @@ class UpdateUserRequest extends FormRequest
                 'email'=>['required','email','unique:users'],
                 'BI'=>['required','unique:users'],
                 'NUIT'=>['required','unique:users'],
-                'contacto_1'=>['required'],
+                'contacto_1'=>['sometimes'],
                 'papel_id'=>['required','exists:papeis,id'],
-                'password'=>['required'],
-                'passwordConfirm'=>['required','same:password'],
+                'password'=>['sometimes'],
+                'passwordConfirm'=>['sometimes','same:password'],
                 'contacto_2'=>['sometimes'],
 
             ];

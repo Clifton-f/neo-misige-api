@@ -43,6 +43,7 @@ $resource=new UserResource($user);
     public function destroy($id)
     {
         //
+        User::destroy($id);
     }
     public function edit(UserRequest $request){
 
@@ -53,11 +54,16 @@ $resource=new UserResource($user);
 
         //$user->update($request->all());
         $user=User::where('id', $id)->first();
+
         $campos = $request->validated();
         $user->nome=$campos['nome'];
         $user->email=$campos['email'];
         $user->BI=$campos['BI'];
         $user->save();
+        foreach ($campos['papel_id'] as $papel){
+            UserPapel::create(["user_id" => $user->id, "papel_id" => $papel]);
+        }
+
         /*$user->update([
             'nome' => $campos['nome'],
             'email' => $campos['email'],
