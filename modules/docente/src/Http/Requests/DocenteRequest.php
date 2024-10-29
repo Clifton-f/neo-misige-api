@@ -31,23 +31,23 @@ class DocenteRequest extends FormRequest
             'papel_id'=>['required','exists:papeis,id'],
             'password'=>['required'],
             'passwordConfirm'=>['required','same:password'],
-            
+            'formacao'=>['required','string'],
             'contacto_2'=>['sometimes'],
-            
-           
-            
+
+
+
         ];
     }
 
     protected function prepareForValidation()
     {
            $this->merge([
-         
+
             'papel_id'=> 2,
             'contacto_1'=>$this->contacto1,
             'contacto_2'=>$this->contacto2,
-            
-            
+
+
             ]);
         }
 }

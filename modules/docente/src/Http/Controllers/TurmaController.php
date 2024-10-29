@@ -19,4 +19,8 @@ class TurmaController
     public function show(Turma $turma){
         return new TurmaResource($turma);
     }
+    public function update()
+    {
+
+    }
 }

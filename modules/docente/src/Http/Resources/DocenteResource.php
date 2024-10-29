@@ -22,7 +22,7 @@ class DocenteResource extends JsonResource
         $user = User::where('id',$this->id)->first();
         $turmas=Turma::where('regente_id',$this->id)->get();
 
-
+        //return parent::toArray($request);
         return [
             'dadosPessoais'=>[
             'id'=>$this->id,

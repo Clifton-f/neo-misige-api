@@ -51,7 +51,7 @@ Route::prefix('docente')->group(function(){
 });
 
 Route::prefix('matricula')->group(function(){
-    Route::apiResource('cursos',CursoController::class);
+    Route::get('cursos',[CursoController::class,'index']);
     Route::get('cadeira',function(){
         return new CadeiraResource(Cadeira::where('id',21)->first());
     });
@@ -66,7 +66,7 @@ Route::prefix('inscricao')->group(function(){
 });
 Route::prefix('avaliacao')->group(function(){
     Route::put('/lancarNota',[AvaliacaoController::class,'update']);
-    Route::get('')
+    Route::get('');
 });
 Route::get('certificado',[CertificadoController::class,'show']);
 

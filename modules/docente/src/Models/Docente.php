@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Docente extends Model
 {
     protected $table = 'docentes';
-
+    protected $fillable =[
+        'id',
+        'formacao'
+    ];
     function user(): BelongsTo {
         return $this->belongsTo(User::class, 'id');
     }
