@@ -2,8 +2,17 @@
 
 namespace Modules\Inscricao\Http\Controllers;
 
-use App\Http\Requests\StoreMediaRequest;
-use App\Http\Requests\UpdateMediaRequest;
+use Modules\Avaliacoes\Http\Resources\MediaResource;
+use Modules\Inscricao\Http\Requests\StoreMediaRequest;
+use Modules\Inscricao\Http\Requests\UpdateMediaRequest;
+use Modules\Inscricao\Http\Requests\ShowMediaRequest;
+use Modules\Inscricao\Http\Resources\CadeiraCollection;
+use Modules\Inscricao\Http\Resources\CadeiraResource;
+use Modules\Inscricao\Http\Resources\CatalogoCollection;
+use Modules\Inscricao\Http\Resources\MediaCollection;
+use Modules\Inscricao\Models\Cadeira;
+use Modules\Inscricao\Models\Catalogo;
+use Modules\Inscricao\Models\Estudante;
 use Modules\Inscricao\Models\Media;
 
 class MediaController
@@ -29,7 +38,25 @@ class MediaController
      */
     public function store(StoreMediaRequest $request)
     {
+
         //
+        $campos = $request->validated();
+
+
+        foreach ($campos['cadeira_id'] as $cadeira){
+
+
+           Media::create([
+               'cadeira_id'=>$cadeira,
+               'curso_id'=>$campos['curso_id'],
+               'estudante_id'=>$campos['estudante_id'],
+               'ano'=>$campos['ano'],
+           ]);
+        }
+        $medias = Media::where('estudante_id', $campos['estudante_id'])->where('ano',$campos['ano'])->get();
+
+        return new MediaCollection($medias);
+
     }
 
     /**
@@ -63,7 +90,11 @@ class MediaController
     {
         //
     }
-    public function cadeiras(Media $media){
-
+    public function cadeiras(ShowMediaRequest $id){
+        $campos = $id->validated();
+        $estudante=Estudante::where('id',$campos['estudante_id'])->first();
+        //return $estudante;
+        $catalogo = Catalogo::where('curso_id',$estudante->curso_id)->get();
+        return new CatalogoCollection($catalogo);
     }
 }

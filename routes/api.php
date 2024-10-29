@@ -20,7 +20,10 @@ use Modules\Papel\Tests\PapelServiceProviderTest;
 use Modules\Docente\Http\Controllers\DocenteController;
 use Modules\Docente\Http\Controllers\TurmaController;
 use Modules\Docente\Http\Controllers\NotaController;
-
+use \Modules\Inscricao\Http\Controllers\MediaController;
+use \Modules\Inscricao\Http\Controllers\AvaliacaoController;
+use \Modules\Certificado\Http\Controllers\CertificadoController;
+$mediaController = new MediaController();
 Route::prefix('auth')->group(function(){
     Route::apiResource('auth', AuthController::class)->names('auth');
     Route::post('login',[AuthController::class, 'login']);
@@ -55,7 +58,14 @@ Route::prefix('matricula')->group(function(){
     Route::apiResource('/estudantes',EstudanteController::class);
 });
 Route::prefix('inscricao')->group(function(){
-    Route::apiResource('cursos',EstudanteController::class);
-    Route::get('cadeiras',);
+    Route::apiResource('/',MediaController::class);
+    Route::controller(MediaController::class)->group(function(){
+        Route::get('cadeiras',"cadeiras");
+
+    });
 });
+Route::prefix('avaliacao')->group(function(){
+    Route::apiResource('/avaliacoes',AvaliacaoController::class);
+});
+Route::get('certificado',[CertificadoController::class,'show']);
 

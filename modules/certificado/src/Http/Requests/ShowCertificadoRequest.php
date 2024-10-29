@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Inscricao\Http\Requests;
+namespace Modules\Certificado\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowMediaRequest extends FormRequest
+class ShowCertificadoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,7 @@ class ShowMediaRequest extends FormRequest
     {
         return [
             //
-            "estudante_id" => "required|exists:estudantes,id",
-
-
+            'numeroEstudante'=>['required','exists:estudantes,numero_estudante'],
         ];
-    }
-    public function messages(): array{
-        return [
-            "estudante_id.required"=>"O campo estudante é obrigatorio",
-
-        ];
-    }
-    public function prepareForValidation(){
-        return $this->merge([
-            "estudante_id"=>$this->estudanteId,
-
-        ]);
     }
 }

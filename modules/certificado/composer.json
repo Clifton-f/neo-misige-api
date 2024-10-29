@@ -1,0 +1,24 @@
+{
+	"name": "modules/certificado",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Certificado\\": "src/",
+			"Modules\\Certificado\\Tests\\": "tests/",
+			"Modules\\Certificado\\Database\\Factories\\": "database/factories/",
+			"Modules\\Certificado\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Certificado\\Providers\\CertificadoServiceProvider"
+			]
+		}
+	}
+}
