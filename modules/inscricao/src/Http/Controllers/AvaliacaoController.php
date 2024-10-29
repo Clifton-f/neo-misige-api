@@ -54,6 +54,7 @@ class AvaliacaoController
     public function update(UpdateAvaliacaoRequest $request, Avaliacao $avaliacao)
     {
         //
+
     }
 
     /**

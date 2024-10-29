@@ -19,20 +19,16 @@ class NotaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // $result = [];
-        // foreach($request as $key=>$value){
-        //     array_push($result, [$key=>$value]);
-        // }
-        // return $result;
+        //
         $cadeira = Cadeira::select('id', 'nome')->where('id', $this->cadeira_id)->first();
-        $curso = Curso::select('id', 'nome')->where('id', $this->curso_id)->first();  
+        $curso = Curso::select('id', 'nome')->where('id', $this->curso_id)->first();
         $estudante = Estudante::select('users.id as id', 'numero_estudante', 'nome')
-                                ->where('users.id', $this->estudante_id)
-                                ->join('users', 'users.id', 'estudantes.id')
-                                ->first();
+            ->where('users.id', $this->estudante_id)
+            ->join('users', 'users.id', 'estudantes.id')
+            ->first();
 
         return [
-            'cadeira' => $cadeira, 
+            'cadeira' => $cadeira,
             'curso' => $curso,
             'estudante'=> $estudante,
             'ano' => $this->ano,
@@ -41,14 +37,8 @@ class NotaResource extends JsonResource
                 'peso' => $this->peso,
             ],
         ];
-        // [
-        //     'cadeiraId' => $cadeira->id,
-        //     'cadeira' => $cadeira->nome,
-        //     'cursoId' => $curso->curso_id,
-        //     'numero_estudante' => $estudante->numero_estudante,
-        //     'nome_estudante' => $estudante->nome,
-        //     'nota' => $this->nota,
-        //     'peso' => $this->peso
-        // ];
+
+
     }
+
 }

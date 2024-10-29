@@ -25,24 +25,29 @@ class NotaCollection extends ResourceCollection
         $curso = [];
         $estudante_frequencia = [];
 
-    
+
         foreach($this as $index => $row){
 
-            $cadeira = Cadeira::select('id', 'nome')->where('id', $row->cadeira_id)->first();
-            $curso = Curso::select('id', 'nome')->where('id', $row->curso_id)->first();  
-            $estudante_frequencia = Estudante::select('nome_avaliacao','nota','estudantes.id as id', 'numero_estudante', 'nome')
+            //$cadeira = Cadeira::select('id', 'nome')->where('id', $row->cadeira_id)->first();
+            //$curso = Curso::select('id', 'nome')->where('id', $row->curso_id)->first();
+            /*$estudante_frequencia = Estudante::select('nome_avaliacao','nota','estudantes.id as id', 'numero_estudante', 'nome')
+                                    ->join('avaliacao_nota', 'estudante_id', 'estudantes.id')
+                                    ->where('nome_avaliacao', $row->nome_avaliacao)
+                                    ->join('users', 'users.id', 'estudantes.id')
+                                    ->get();*/
+            $estudante_frequencia = Estudante::select('estudantes.id as id', 'numero_estudante', 'nome','nota')
                                     ->join('avaliacao_nota', 'estudante_id', 'estudantes.id')
                                     ->where('nome_avaliacao', $row->nome_avaliacao)
                                     ->join('users', 'users.id', 'estudantes.id')
                                     ->get();
-            break; 
+            break;
         }
-       
+
         return [
-            'cadeira' => $cadeira,
-            'curso' => $curso,
+            //'cadeira' => $cadeira,
+            //'curso' => $curso,
             'notas' => $estudante_frequencia
         ];
     }
-        
+
 }

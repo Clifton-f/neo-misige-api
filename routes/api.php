@@ -65,7 +65,8 @@ Route::prefix('inscricao')->group(function(){
     });
 });
 Route::prefix('avaliacao')->group(function(){
-    Route::apiResource('/avaliacoes',AvaliacaoController::class);
+    Route::put('/lancarNota',[AvaliacaoController::class,'update']);
+    Route::get('')
 });
 Route::get('certificado',[CertificadoController::class,'show']);
 

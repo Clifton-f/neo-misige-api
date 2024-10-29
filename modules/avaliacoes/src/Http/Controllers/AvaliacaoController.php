@@ -16,7 +16,7 @@ class AvaliacaoController
     public function index(Request $request)
     {
         //
-        
+
 
     }
 
@@ -26,7 +26,7 @@ class AvaliacaoController
     public function create()
     {
         //
-        
+
     }
 
     /**
@@ -35,8 +35,7 @@ class AvaliacaoController
     public function store(StoreAvaliacaoRequest $request)
     {
 
-        $campos = $request->validate();
-        return new AvaliacaoResource(Avaliacao::create($campos));
+
 
     }
 
