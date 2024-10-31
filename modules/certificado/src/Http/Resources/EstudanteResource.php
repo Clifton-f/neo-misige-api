@@ -36,7 +36,7 @@ class EstudanteResource extends JsonResource
             $mediaGlobal+=$media->media;
         }
         if(count($medias)!=0){
-            $mediasGlobal = $mediaGlobal/count($medias);
+            $mediaGlobal = $mediaGlobal/count($medias);
         }
         return [
 
@@ -50,7 +50,7 @@ class EstudanteResource extends JsonResource
             //'curso_faculdade'=>$curso,
             'mediasCadeiras'=>new MediaCollection($medias),
             'mediaGlobal'=>$mediaGlobal,
-            'nomeReitor'=>'Dr. António Silva',
+            'nomeReitor'=>'Dr. Manuel Guilherme Júnior',
 
         ];
         return parent::toArray($request);

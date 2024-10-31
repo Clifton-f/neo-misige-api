@@ -21,9 +21,13 @@ class UserController
     /**
      * Show the form for creating a new resource.
      */
-    public function show(User $user){
-$resource=new UserResource($user);
+    public function show($id){
 
+        $user = User::where('id',$id)->first();
+        $resource=new UserResource($user);
+        if(!$user){
+            return response()->json(["message" => "User not found"], 404);
+        }
         return $resource->getUser();
 
     }
@@ -44,6 +48,7 @@ $resource=new UserResource($user);
     {
         //
         User::destroy($id);
+        return response()->json(null, 204);
     }
     public function edit(UserRequest $request){
 
@@ -61,16 +66,13 @@ $resource=new UserResource($user);
         $user->BI=$campos['BI'];
         $user->save();
         foreach ($campos['papel_id'] as $papel){
-            UserPapel::create(["user_id" => $user->id, "papel_id" => $papel]);
+            if(UserPapel::where('user_id', $user->id)->where('papel_id', $papel)->count()==0){
+                UserPapel::create(["user_id" => $user->id, "papel_id" => $papel]);
+            }
+
         }
 
-        /*$user->update([
-            'nome' => $campos['nome'],
-            'email' => $campos['email'],
-            "BI"=>$campos['BI'],
-        "NUIT"=> $campos['NUIT'],
-        ]);
-        $user->save();*/
+
         $resource=new UserResource($user);
         return new UserResource($user);
 

@@ -28,7 +28,7 @@ class UserResource extends JsonResource
             'numerEstudante'=>$estudante->numero_estudante,
             'nome'=>$this->nome,
             'curso_faculdade'=>$estudante,
-            'nomeReitor'=>'Dr. António Silva',
+            'nomeReitor'=>'Dr. Manuel Guilherme Júnior',
 
         ];
     }

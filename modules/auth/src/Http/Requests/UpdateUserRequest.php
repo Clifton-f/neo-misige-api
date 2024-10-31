@@ -24,9 +24,9 @@ class UpdateUserRequest extends FormRequest
         if ($this->method() !== 'PUT') {
             return [
                 'nome' =>['required'],
-                'email'=>['required','email','unique:users'],
-                'BI'=>['required','unique:users'],
-                'NUIT'=>['required','unique:users'],
+                'email'=>['required','email'],
+                'BI'=>['required'],
+                'NUIT'=>['required'],
                 'contacto_1'=>['sometimes'],
                 'papel_id'=>['required','exists:papeis,id'],
                 'password'=>['sometimes'],

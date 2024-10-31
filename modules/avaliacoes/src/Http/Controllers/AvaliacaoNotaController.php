@@ -67,9 +67,12 @@ class AvaliacaoNotaController
             return response()->json([
                 'success'=>'false',
                 'message'=>'esse estudante não é afectado por essa avaliacao'
-            ]);
+            ])->setStatusCode(400);
         }
-        return $update;
+        return response()->json([
+            'success'=>'true',
+            'message'=>'Nota lançada com sucesso'
+        ])->setStatusCode(200);
 
     }
 

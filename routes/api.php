@@ -7,6 +7,7 @@ use Modules\Auth\Http\Controllers\AuthController;
 //use Modules\Papel\Http\Controllers\PapelController;
 use Modules\Cursos\Http\Controllers\CadeiraController;
 use Modules\Cursos\Http\Controllers\DepartamentoController;
+use Modules\Cursos\Http\Controllers\FaculdadeController;
 use Modules\Papel\Http\Controllers\PapelController;
 use Modules\Auth\Http\Controllers\UserController;
 use Modules\Matriculas\Http\Controllers\CursoController;
@@ -81,6 +82,7 @@ Route::prefix('curso')->group(function(){
     Route::apiResource('/cadeiras',CadeiraControllerCursos::class);
     Route::apiResource('/departamentos',DepartamentoController::class);
     Route::post('/catalogo',[CatalogoController::class,'store']);
+    Route::apiResource('/faculdades',FaculdadeController::class);
 });
 
 
