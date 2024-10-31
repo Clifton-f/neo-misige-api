@@ -15,9 +15,9 @@ class NotaController
         $campos = $request->validated();
         $notas = Nota::where('nome_avaliacao', $campos['nomeAvaliacao'])
             ->where('curso_id', $campos['cursoId'])
-            ->where('cadeira_id', $campos["cadeiraId"])->get()
-            ;
-//return $campos;
+            ->where('cadeira_id', $campos["cadeiraId"])
+            ->where('ano',$campos['ano'])->get();
+
 
         return new NotaCollection($notas);
 
