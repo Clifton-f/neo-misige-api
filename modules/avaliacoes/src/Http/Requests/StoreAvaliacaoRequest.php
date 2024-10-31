@@ -11,7 +11,7 @@ class StoreAvaliacaoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,24 +23,12 @@ class StoreAvaliacaoRequest extends FormRequest
     {
         return [
             //
-            'curso_id'=>'required',
-            'cadeira_id'=>'required',
-            'nome_avaliacao'=>'required',
-            'peso'=>'required'
+            'cursoId'=>'required',
+            'cadeiraId'=>'required',
+            'nomeAvaliacao'=>'required',
+            'peso'=>['required','numeric','min:1','max:100'],
+            'ano'=>['required','numeric','min:2000','max:3000','exists:turmas,ano'],
 
         ];
-    }
-    protected function prepareForValidation()
-    {
-        $ano=
-        
-        $this->merge([
-            "curso_id"=>'cursoId',
-            'cadeira_id'=>'cadeiraId',
-            'nome_avaliacao'=>'nomeAvaliacao',
-            "ano"=>gmdate("Y")
-            
-
-        ]);
     }
 }

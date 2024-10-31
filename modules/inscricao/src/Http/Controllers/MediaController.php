@@ -23,6 +23,7 @@ class MediaController
     public function index()
     {
         //
+        return new MediaCollection(Media::all());
     }
 
     /**
@@ -62,9 +63,11 @@ class MediaController
     /**
      * Display the specified resource.
      */
-    public function show(Media $media)
+    public function show(ShowMediaRequest $estudante)
     {
         //
+        $medias = Media::where('estudante_id',$estudante)->get();
+        return new MediaCollection($medias);
     }
 
     /**

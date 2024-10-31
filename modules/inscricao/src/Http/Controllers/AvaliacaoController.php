@@ -14,6 +14,7 @@ class AvaliacaoController
     public function index()
     {
         //
+
     }
 
     /**

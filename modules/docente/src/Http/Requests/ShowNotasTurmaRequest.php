@@ -24,10 +24,10 @@ class ShowNotasTurmaRequest extends FormRequest
         return [
             //
 
-            'curso_id' => 'required|exists:cursos,id',
+            'cursoId' => 'required|exists:cursos,id',
             'ano'=>'required:exists:turmas,ano',
-            'cadeira_id'=>'required:exists:cadeiras,id',
-            'nome_avaliacao'=>'required:exists:avaliacoes,nome_avaliacao',
+            'cadeiraId'=>'required:exists:cadeiras,id',
+            'nomeAvaliacao'=>'required:exists:avaliacoes,nome_avaliacao',
 
         ];
     }

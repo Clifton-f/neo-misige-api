@@ -13,11 +13,11 @@ class NotaController
     public function index(ShowNotasTurmaRequest $request){
 
         $campos = $request->validated();
-        $notas = Nota::where('nome_avaliacao', $campos['nome_avaliacao'])
-            ->where('curso_id', $campos['curso_id'])
-            ->where('cadeira_id', $campos['cadeira_id'])
-            -> where('ano', $campos['ano'])->get();
-
+        $notas = Nota::where('nome_avaliacao', $campos['nomeAvaliacao'])
+            ->where('curso_id', $campos['cursoId'])
+            ->where('cadeira_id', $campos["cadeiraId"])->get()
+            ;
+//return $campos;
 
         return new NotaCollection($notas);
 
@@ -38,7 +38,7 @@ class NotaController
                 ->where('estudante_id', $estudante_id)
                 -> where('ano', $ano)->first()
         );
-        return $resource;
+        return $resource->getNotaEstudante();
     }
 
 

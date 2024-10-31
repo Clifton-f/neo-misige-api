@@ -18,6 +18,7 @@ class AvaliacaoController
         //
 
 
+
     }
 
     /**
@@ -34,7 +35,15 @@ class AvaliacaoController
      */
     public function store(StoreAvaliacaoRequest $request)
     {
-
+        $campos = $request->validated();
+        $avaliacao=Avaliacao::create([
+            'curso_id' => $campos['cursoId'],
+            'cadeira_id' => $campos['cadeiraId'],
+            'nome_avaliacao' => $campos['nomeAvaliacao'],
+            'peso' => ($campos['peso']/100),
+            'ano' => $campos['ano'],
+        ]);
+        return new AvaliacaoResource($avaliacao);
 
 
     }

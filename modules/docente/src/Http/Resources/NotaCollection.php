@@ -21,24 +21,26 @@ class NotaCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        return parent::toArray($request);
         $estudante_frequencia = [];
-
+        $nomeAvaliacao='';
 
         foreach($this as $index => $row){
-            $estudante_frequencia = Estudante::select('estudantes.id as id', 'numero_estudante', 'nome','nota')
+            $estudante_frequencia =$row; /*= Estudante::select('estudantes.id as id', 'numero_estudante', 'nome','nota')
                                     ->join('avaliacao_nota', 'estudante_id', 'estudantes.id')
-                                    ->where('nome_avaliacao', $row->nome_avaliacao)
+                                    ->where('nome_avaliacao', $row->-nome_avaliacao)
                                     ->where('avaliacao_nota.cadeira_id', $row->cadeira_id)
                                     ->where('avaliacao_nota.curso_id', $row->curso_id)
                                     ->join('users', 'users.id', 'estudantes.id')
-                                    ->get();
-            break;
+                                    ->get();*/
+            $nomeAvaliacao = $row->nome_avaliacao;
+
         }
 
         return [
             //'cadeira' => $cadeira,
             //'curso' => $curso,
-            'avaliacao'=>$this[0]->nome_avaliacao,
+            'avaliacao'=>$nomeAvaliacao,
             'notas' => $estudante_frequencia
         ];
     }

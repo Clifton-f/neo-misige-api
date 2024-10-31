@@ -20,6 +20,23 @@ class NotaResource extends JsonResource
     public function toArray(Request $request): array
     {
         //
+
+        $estudante = Estudante::select('users.id as id', 'numero_estudante', 'nome')
+            ->where('users.id', $this->estudante_id)
+            ->join('users', 'users.id', 'estudantes.id')
+            ->first();
+
+        return [
+
+            'estudante'=> $estudante,
+
+                'nota' => $this->nota,
+
+        ];
+
+
+    }
+    public function getNotaEstudante(){
         $cadeira = Cadeira::select('id', 'nome')->where('id', $this->cadeira_id)->first();
         $curso = Curso::select('id', 'nome')->where('id', $this->curso_id)->first();
         $estudante = Estudante::select('users.id as id', 'numero_estudante', 'nome')
@@ -37,6 +54,7 @@ class NotaResource extends JsonResource
                 'peso' => $this->peso,
             ],
         ];
+
 
 
     }
