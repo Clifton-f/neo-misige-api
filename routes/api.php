@@ -5,9 +5,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\AuthController;
 //use Modules\Papel\Http\Controllers\PapelController;
+use Modules\Cursos\Http\Controllers\CadeiraController;
+use Modules\Cursos\Http\Controllers\DepartamentoController;
 use Modules\Papel\Http\Controllers\PapelController;
 use Modules\Auth\Http\Controllers\UserController;
 use Modules\Matriculas\Http\Controllers\CursoController;
+use Modules\Cursos\Http\Controllers\CursoController as CursoControllerCursos;
+use Modules\Cursos\Http\Controllers\CadeiraController as CadeiraControllerCursos;
 use Modules\Matriculas\Http\Controllers\EstudanteController;
 use Modules\Matriculas\Http\Resources\CadeiraResource;
 use Modules\Matriculas\Models\Cadeira;
@@ -23,6 +27,9 @@ use Modules\Docente\Http\Controllers\NotaController;
 use \Modules\Inscricao\Http\Controllers\MediaController;
 use \Modules\Inscricao\Http\Controllers\AvaliacaoController;
 use \Modules\Certificado\Http\Controllers\CertificadoController;
+use \Modules\Cursos\Http\Controllers\CatalogoController;
+use Modules\Avaliacoes\Http\Controllers\AvaliacaoNotaController;
+
 $mediaController = new MediaController();
 Route::prefix('auth')->group(function(){
     Route::apiResource('auth', AuthController::class)->names('auth');
@@ -45,8 +52,8 @@ Route::prefix('papel')->group(function(){
 Route::prefix('docente')->group(function(){
     Route::apiResource('/docentes', DocenteController::class);
     Route::apiResource('/turmas', TurmaController::class);
-    Route::get("/notaEstudante", [NotaController::class, 'show']);
-    Route::get("/notasTurma", [NotaController::class, 'index']);
+    Route::post("/notaEstudante", [NotaController::class, 'show']);
+    Route::post("/notasTurma", [NotaController::class, 'index']);
     //Route::get("/nota/{ano}/{cadeira_id}/{curso_id}/{nome_avaliacao}/{estudante_id}", [NotaController::class, 'show']);
 });
 
@@ -65,8 +72,17 @@ Route::prefix('inscricao')->group(function(){
     });
 });
 Route::prefix('avaliacao')->group(function(){
-    Route::put('/lancarNota',[AvaliacaoController::class,'update']);
+    Route::patch('/lancarnota',[AvaliacaoNotaController::class,'update']);
     Route::get('');
 });
+
+Route::prefix('curso')->group(function(){
+    Route::apiResource('/cursos',CursoControllerCursos::class);
+    Route::apiResource('/cadeiras',CadeiraControllerCursos::class);
+    Route::apiResource('/departamentos',DepartamentoController::class);
+    Route::post('/catalogo',[CatalogoController::class,'store']);
+});
+
+
 Route::get('certificado',[CertificadoController::class,'show']);
 

@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Matriculas\Http\Resources;
+namespace Modules\Cursos\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Modules\Matriculas\Models\Catalogo;
+use Modules\Cursos\Models\Departamento;
+use Modules\Cursos\Http\Resources\CatalogoCollection;
+use Modules\Cursos\Models\Catalogo;
 
 class CursoResource extends JsonResource
 {
@@ -15,21 +16,23 @@ class CursoResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-
-
     public function toArray(Request $request): array
     {
         $faculdade = DB::table('departamentos')
             ->join('faculdades', 'faculdades.id', '=', 'departamentos.faculdade_id')
             ->where('departamentos.id',$this->departamento_id)
             ->pluck('faculdades.nome')->toArray();
+        $departamento= Departamento::where('id',$this->departamento_id)->first();
         return [
             'id'=>$this->id,
             'nome'=>$this->nome,
-            'descricao'=>$this->descricao,
-            'faculdade'=>$faculdade[0],
             'duracaoMinima'=>$this->duracao_minima,
-            'duracaoMaxima'=>$this->duracao_maxima
+            'duracaoMaxima'=>$this->duracao_maxima,
+            'faculdade'=>$faculdade[0],
+            'departamento'=>[
+                'id'=>$departamento->id,
+                'nome'=>$departamento->nome,
+            ],
 
         ];
     }
@@ -44,4 +47,5 @@ class CursoResource extends JsonResource
             'cadeiras'=>new CatalogoCollection($catalogo)
         ];
     }
+
 }

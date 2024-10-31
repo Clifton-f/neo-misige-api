@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Avaliacoes\Http\Requests;
+namespace Modules\Cursos\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAvaliacaoRequest extends FormRequest
+class StoreCatalogoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,10 @@ class UpdateAvaliacaoRequest extends FormRequest
     {
         return [
             //
-            "cadeiraId" => ["required", "exists:avaliacoes,cadeira_id"],
-            "cursoId" => ["required", "exists:avaliacoes,curso_id"],
-            "nomeAvaliacao" => ["required", "string", "max:255","exists:avaliacoes,nome_avaliacao"],
-            "ano"=>["required", "integer", "min:2000", "max:3000"],
-            "peso"=>["required", "integer", "min:0", "max:100"],
+            "cadeiraId"=>['required', 'integer', 'exists:cadeira,id'],
+        "cursoId"=>['required', 'integer', 'exists:curso,id'],
+        "ano"=>['required', 'integer', 'min:1', 'max:1'],
+        "semestre"=>['required', 'integer', 'min:1', 'max:1'],
         ];
     }
 }

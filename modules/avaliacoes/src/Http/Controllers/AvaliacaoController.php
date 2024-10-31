@@ -63,12 +63,13 @@ class AvaliacaoController
     public function update(UpdateAvaliacaoRequest $request)
     {
         //
-        $campos = $request->validate();
-        $avaliacao = Avaliacao::where('cadeira_id',$campos['cadeira_id'])
-                        ->where('curso_id',$campos['curso_id'])
-                        ->where('nome_avaliacao',$campos['nome_avaliacao'])
+        $campos = $request->validated();
+        $avaliacao = Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+                        ->where('curso_id',$campos['cursoId'])
+                        ->where('nome_avaliacao',$campos['nomeAvaliacao'])
                         ->where('ano',gmdate('Y'));
-        $avaliacao->peso = $campos['peso'];
+
+        $avaliacao->peso = ($campos['peso'])/100;
         $avaliacao->save();
         return new AvaliacaoResource($avaliacao);
 

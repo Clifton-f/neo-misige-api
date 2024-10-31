@@ -8,6 +8,7 @@ class AvaliacaoNota extends Model
 {
     //
 
+    protected $table = 'avaliacao_nota';
     public function avaliacao(){
         return $this->belongsTo('Avaliacao',['curso_id','cadeira_id','ano','nome_avaliacao'],['curso_id','cadeira_id','ano','nome_avaliacao']);
     }

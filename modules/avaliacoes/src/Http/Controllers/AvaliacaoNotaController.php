@@ -54,14 +54,23 @@ class AvaliacaoNotaController
     public function update(UpdateAvaliacaoNotaRequest $request)
     {
         //
-        $campos = $request->validate();
-        $avaliacaoNota=AvaliacaoNota::where('cadeira_id',$campos['cadeira_id'])
-        ->where('curso_id',$campos['curso_id'])
-        ->where('nome_avaliacao',$campos['nome_avaliacao'])
-        ->where('estudante_id',$campos['estudante_id'])->where('ano',gmdate('Y'));
-        $avaliacaoNota->nota=$campos['nota'];
-        $avaliacaoNota->save();
-        
+        $campos = $request->validated();
+        $update=AvaliacaoNota::where('cadeira_id',$campos['cadeiraId'])
+        ->where('curso_id',$campos['cursoId'])
+        ->where('nome_avaliacao',$campos['nomeAvaliacao'])
+        ->where('estudante_id',$campos['estudanteId'])->where('ano',$campos['ano'])
+        ->update([
+            'nota'=>$campos['nota']
+        ]);
+
+        if($update==0){
+            return response()->json([
+                'success'=>'false',
+                'message'=>'esse estudante não é afectado por essa avaliacao'
+            ]);
+        }
+        return $update;
+
     }
 
     /**

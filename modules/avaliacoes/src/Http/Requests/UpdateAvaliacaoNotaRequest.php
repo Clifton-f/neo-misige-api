@@ -11,7 +11,7 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,25 +23,15 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
     {
         return [
             //
-            'curso_id'=>['required'],
-            'cadeira_id'=>['required'],
-            'nome_avaliacao'=>['required'],
-            'peso'=>['required'],
-            'ano'=>['required']
+            'cursoId'=>['required','exists:avaliacoes,curso_id'],
+            'cadeiraId'=>['required','exists:avaliacoes,cadeira_id'],
+            'nomeAvaliacao'=>['required','exists:avaliacoes,nome_avaliacao'],
+            'estudanteId'=>['required','exists:avaliacao_nota,estudante_id'],
+            'nota'=>['required','min:0','max:20'],
+            'ano'=>['required','min:2000','max:3000','exists:avaliacoes,ano','integer'],
+
 
         ];
     }
-    protected function prepareForValidation()
-    {
-        
-        
-        $this->merge([
-            "curso_id"=>'cursoId',
-            'cadeira_id'=>'cadeiraId',
-            'nome_avaliacao'=>'nomeAvaliacao',
-            
-            
 
-        ]);
-    }
 }
