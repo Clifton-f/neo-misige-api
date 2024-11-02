@@ -15,7 +15,7 @@ class AvaliacaoController
     /**
      * Display a listing of the resource.
      */
-    public function index(ShowAvaliacaoRequest $request)
+    public function index()
     {
         //
         return 'reached';

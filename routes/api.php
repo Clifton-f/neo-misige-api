@@ -78,7 +78,7 @@ Route::prefix('inscricao')->group(function(){
 });
 Route::prefix('avaliacao')->group(function(){
     Route::patch('/lancarnota',[AvaliacaoNotaController::class,'update']);
-    Route::post('/avaliacoes',[AvaliacaoControlerAvaliacao::class,'store']);
+    Route::post('/adicionaravaliacao',[AvaliacaoControlerAvaliacao::class,'store']);
     Route::put('/avaliacao',[AvaliacaoControlerAvaliacao::class,'update']);
     Route::post('/avaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
     Route::get('/avaliacoes',[AvaliacaoControlerAvaliacao::class,'index']);
