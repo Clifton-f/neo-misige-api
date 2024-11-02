@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Inscricao\Http\Requests;
+namespace Modules\Avaliacoes\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAvaliacaoRequest extends FormRequest
+class ShowAvaliacaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,11 @@ class UpdateAvaliacaoRequest extends FormRequest
     {
         return [
             //
+            'cursoId' => 'required|integer|exists:cursos,id',
+            'cadeiraId' => 'required|integer|exists:cadeiras,id',
+            'anoId' => 'required|integer|exists:turmas,ano',
+            'nome_avaliacao'=>'sometimes|string|exists:avaliacoes,nome_avaliacao',
+
         ];
     }
 }

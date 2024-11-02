@@ -3,8 +3,10 @@
 namespace Modules\Avaliacoes\Http\Controllers;
 
 use Composer\DependencyResolver\Request;
+use Modules\Avaliacoes\Http\Requests\ShowAvaliacaoRequest;
 use Modules\Avaliacoes\Http\Requests\UpdateAvaliacaoRequest;
 use Modules\Avaliacoes\Http\Requests\StoreAvaliacaoRequest;
+use Modules\Avaliacoes\Http\Resources\AvaliacaoCollection;
 use Modules\Avaliacoes\Http\Resources\AvaliacaoResource;
 use Modules\Avaliacoes\Models\Avaliacao;
 
@@ -13,11 +15,15 @@ class AvaliacaoController
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(ShowAvaliacaoRequest $request)
     {
         //
+        return 'reached';
+        $campos = $request->validated();
+        $avaliacoes=Avaliacao::where('curso_id', $campos["cursoId"])
+            ->where('cadeira_id', $campos["cadeiraId"])->where('ano',$campos["ano"])->get();
 
-
+            return new AvaliacaoCollection($avaliacoes);
 
     }
 
@@ -51,9 +57,14 @@ class AvaliacaoController
     /**
      * Display the specified resource.
      */
-    public function show(Avaliacao $avaliacao)
+    public function show(ShowAvaliacaoRequest $request)
     {
+        return 'reached';
         //
+        $campos = $request->validated();
+        $avaliacao=Avaliacao::where('curso_id', $campos["cursoId"])
+            ->where('cadeira_id', $campos["cadeiraId"])->where('ano',$campos["ano"])->first();
+        return new AvaliacaoResource($avaliacao);
     }
 
     /**

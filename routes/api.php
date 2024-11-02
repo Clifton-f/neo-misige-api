@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ use \Modules\Certificado\Http\Controllers\CertificadoController;
 use \Modules\Cursos\Http\Controllers\CatalogoController;
 use Modules\Avaliacoes\Http\Controllers\AvaliacaoNotaController;
 use Modules\Avaliacoes\Http\Controllers\AvaliacaoController as AvaliacaoControlerAvaliacao;
+use Illuminate\Support\Facades\Http;
 
 $mediaController = new MediaController();
 Route::prefix('auth')->group(function(){
@@ -78,6 +80,7 @@ Route::prefix('avaliacao')->group(function(){
     Route::patch('/lancarnota',[AvaliacaoNotaController::class,'update']);
     Route::post('/avaliacoes',[AvaliacaoControlerAvaliacao::class,'store']);
     Route::put('/avaliacao',[AvaliacaoControlerAvaliacao::class,'update']);
+    Route::post('/avaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
     Route::get('/avaliacoes',[AvaliacaoControlerAvaliacao::class,'index']);
 });
 
@@ -91,4 +94,12 @@ Route::prefix('curso')->group(function(){
 
 
 Route::get('certificado',[CertificadoController::class,'show']);
+Route::get('remote',function(Request $request){
+    $client = new Client();
+    $uri = 'https://api.econlab.co.mz/api/certificado?numeroEstudante='.$request->input('studentNumber');
+
+    //$response = $client->request('GET',$uri);
+    $response = Http::Get($uri);
+   return json_decode($response->getBody());
+});
 
