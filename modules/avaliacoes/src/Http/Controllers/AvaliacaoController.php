@@ -113,9 +113,9 @@ class AvaliacaoController
 
     public function editarPeso(UpdateAvaliacaoRequest $request)
     {
-        return ($request);
+
         $campos = $request->validated();
-        dd($campos);
+
         Avaliacao::where('cadeira_id',$campos['cadeiraId'])
             ->where('curso_id',$campos['cursoId'])
             ->where('nome_avaliacao',$campos['nomeAvaliacao'])
