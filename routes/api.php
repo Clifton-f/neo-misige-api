@@ -36,8 +36,8 @@ use Illuminate\Support\Facades\Http;
 
 $mediaController = new MediaController();
 Route::prefix('auth')->group(function(){
-    Route::apiResource('auth', AuthController::class)->names('auth');
-    Route::post('login',[AuthController::class, 'login']);
+    Route::apiResource('/auth', AuthController::class)->names('auth');
+    Route::post('/login',[AuthController::class, 'login']);
     Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:api');
 
     Route::resource('users',UserController::class)->middleware('auth:api');//middleware('auth:api');//->middleware('auth:sanctum');
@@ -79,9 +79,9 @@ Route::prefix('inscricao')->group(function(){
 Route::prefix('avaliacao')->group(function(){
     Route::patch('/lancarnota',[AvaliacaoNotaController::class,'update']);
     Route::post('/adicionaravaliacao',[AvaliacaoControlerAvaliacao::class,'store']);
-    Route::put('/avaliacao',[AvaliacaoControlerAvaliacao::class,'update']);
-    Route::post('/avaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
-    Route::get('/avaliacoes',[AvaliacaoControlerAvaliacao::class,'index']);
+    Route::get('/editarpesoavaliacao',[AvaliacaoControlerAvaliacao::class,'editarPeso']);
+    Route::post('/veravaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
+    Route::post('/veravaliacoesturma',[AvaliacaoControlerAvaliacao::class,'index']);
 });
 
 Route::prefix('curso')->group(function(){

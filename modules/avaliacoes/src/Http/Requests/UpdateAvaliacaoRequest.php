@@ -23,11 +23,11 @@ class UpdateAvaliacaoRequest extends FormRequest
     {
         return [
             //
-            "cadeiraId" => ["required", "exists:avaliacoes,cadeira_id"],
-            "cursoId" => ["required", "exists:avaliacoes,curso_id"],
-            "nomeAvaliacao" => ["required", "string", "max:255","exists:avaliacoes,nome_avaliacao"],
-            "ano"=>["required", "integer", "min:2000", "max:3000"],
-            "peso"=>["required", "integer", "min:0", "max:100"],
+            "cadeiraId" => ["required"],//, "exists:avaliacoes,cadeira_id"],
+            "cursoId" => ["required"],// "exists:avaliacoes,curso_id"],
+            "nomeAvaliacao" => ["required"],// "string", "max:255","exists:avaliacoes,nome_avaliacao"],
+            "ano"=>["required"],// "integer", "min:2000", "max:3000"],
+            "peso"=>["required"]// "integer", "min:0", "max:100"],
         ];
     }
 }

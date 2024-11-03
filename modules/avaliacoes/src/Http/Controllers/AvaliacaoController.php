@@ -15,10 +15,10 @@ class AvaliacaoController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ShowAvaliacaoRequest $request)
     {
         //
-        return 'reached';
+
         $campos = $request->validated();
         $avaliacoes=Avaliacao::where('curso_id', $campos["cursoId"])
             ->where('cadeira_id', $campos["cadeiraId"])->where('ano',$campos["ano"])->get();
@@ -59,7 +59,7 @@ class AvaliacaoController
      */
     public function show(ShowAvaliacaoRequest $request)
     {
-        return 'reached';
+
         //
         $campos = $request->validated();
         $avaliacao=Avaliacao::where('curso_id', $campos["cursoId"])
@@ -70,9 +70,10 @@ class AvaliacaoController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Avaliacao $avaliacao)
+    public function edit(UpdateAvaliacaoRequest $avaliacao)
     {
         //
+        dd($avaliacao);
 
 
     }
@@ -80,17 +81,24 @@ class AvaliacaoController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAvaliacaoRequest $request)
+    public function update(StoreAvaliacaoRequest $request)
     {
         //
+        return ($request);
         $campos = $request->validated();
-        $avaliacao = Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+        dd($campos);
+        Avaliacao::where('cadeira_id',$campos['cadeiraId'])
                         ->where('curso_id',$campos['cursoId'])
                         ->where('nome_avaliacao',$campos['nomeAvaliacao'])
-                        ->where('ano',gmdate('Y'));
+                        ->where('ano',$campos['ano'])->update([
+                            "peso" => ($campos['peso']/100),
+            ]);
 
-        $avaliacao->peso = ($campos['peso'])/100;
-        $avaliacao->save();
+       $avaliacao= Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+           ->where('curso_id',$campos['cursoId'])
+           ->where('nome_avaliacao',$campos['nomeAvaliacao'])
+           ->where('ano',$campos['ano'])->first();
+
         return new AvaliacaoResource($avaliacao);
 
     }
@@ -101,5 +109,26 @@ class AvaliacaoController
     public function destroy(Avaliacao $avaliacao)
     {
         //
+    }
+
+    public function editarPeso(UpdateAvaliacaoRequest $request)
+    {
+        return ($request);
+        $campos = $request->validated();
+        dd($campos);
+        Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+            ->where('curso_id',$campos['cursoId'])
+            ->where('nome_avaliacao',$campos['nomeAvaliacao'])
+            ->where('ano',$campos['ano'])->update([
+                "peso" => ($campos['peso']/100),
+            ]);
+
+        $avaliacao= Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+            ->where('curso_id',$campos['cursoId'])
+            ->where('nome_avaliacao',$campos['nomeAvaliacao'])
+            ->where('ano',$campos['ano'])->first();
+
+        return new AvaliacaoResource($avaliacao);
+
     }
 }

@@ -25,7 +25,7 @@ class ShowAvaliacaoRequest extends FormRequest
             //
             'cursoId' => 'required|integer|exists:cursos,id',
             'cadeiraId' => 'required|integer|exists:cadeiras,id',
-            'anoId' => 'required|integer|exists:turmas,ano',
+            'ano'=>['required','numeric','min:2000','max:3000','exists:turmas,ano'],
             'nome_avaliacao'=>'sometimes|string|exists:avaliacoes,nome_avaliacao',
 
         ];
