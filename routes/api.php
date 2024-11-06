@@ -33,6 +33,7 @@ use \Modules\Cursos\Http\Controllers\CatalogoController;
 use Modules\Avaliacoes\Http\Controllers\AvaliacaoNotaController;
 use Modules\Avaliacoes\Http\Controllers\AvaliacaoController as AvaliacaoControlerAvaliacao;
 use Illuminate\Support\Facades\Http;
+use \Modules\Avaliacoes\Http\Controllers\TurmaController as AvaliacaoTurmaController;
 
 $mediaController = new MediaController();
 Route::prefix('auth')->group(function(){
@@ -72,7 +73,7 @@ Route::prefix('inscricao')->group(function(){
     Route::apiResource('/inscricoes',MediaController::class);
 
     Route::controller(MediaController::class)->group(function(){
-        Route::get('cadeiras',"cadeiras");
+        Route::post('cadeiras',"cadeiras");
 
     });
 });
@@ -82,6 +83,10 @@ Route::prefix('avaliacao')->group(function(){
     Route::put('/editarpesoavaliacao',[AvaliacaoControlerAvaliacao::class,'editarPeso']);
     Route::post('/veravaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
     Route::post('/veravaliacoesturma',[AvaliacaoControlerAvaliacao::class,'index']);
+    Route::delete('eliminaravaliacao',[AvaliacaoControlerAvaliacao::class,'destroy']);
+    Route::post('/veranos',[AvaliacaoTurmaController::class,'anosActivo']);
+
+    Route::post('/verturmas',[AvaliacaoTurmaController::class,'showTurmas']);
 });
 
 Route::prefix('curso')->group(function(){

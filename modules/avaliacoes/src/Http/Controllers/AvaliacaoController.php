@@ -86,7 +86,7 @@ class AvaliacaoController
         //
         return ($request);
         $campos = $request->validated();
-        dd($campos);
+
         Avaliacao::where('cadeira_id',$campos['cadeiraId'])
                         ->where('curso_id',$campos['cursoId'])
                         ->where('nome_avaliacao',$campos['nomeAvaliacao'])
@@ -106,9 +106,17 @@ class AvaliacaoController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Avaliacao $avaliacao)
+    public function destroy(ShowAvaliacaoRequest $request)
     {
         //
+        $campos = $request->validated();
+
+        return Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+            ->where('curso_id',$campos['cursoId'])
+            ->where('nome_avaliacao',$campos['nomeAvaliacao'])
+            ->where('ano',$campos['ano'])->delete();
+
+
     }
 
     public function editarPeso(UpdateAvaliacaoRequest $request)

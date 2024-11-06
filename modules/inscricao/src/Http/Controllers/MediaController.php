@@ -2,6 +2,7 @@
 
 namespace Modules\Inscricao\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Modules\Avaliacoes\Http\Resources\MediaResource;
 use Modules\Inscricao\Http\Requests\StoreMediaRequest;
 use Modules\Inscricao\Http\Requests\UpdateMediaRequest;
@@ -97,7 +98,19 @@ class MediaController
         $campos = $id->validated();
         $estudante=Estudante::where('id',$campos['estudante_id'])->first();
         //return $estudante;
-        $catalogo = Catalogo::where('curso_id',$estudante->curso_id)->get();
-        return new CatalogoCollection($catalogo);
+        $aprovadas = DB::table('medias')
+            ->where('estudante_id',$estudante->id)
+            ->where('media','>=10')
+            ->pluck('cadeira_id');
+        //return $aprovadas;
+
+        $cadeiras = DB::table('turmas')
+            ->join('cadeiras', 'turmas.cadeira_id', '=', 'cadeiras.id')
+            ->where('turmas.curso_id',$estudante->curso_id)
+            ->where('turmas.ano',gmdate("Y"))
+            ->whereNotIn('turmas.cadeira_id',$aprovadas)
+            ->select("cadeiras.id as cadeiraId", "cadeiras.nome","turmas.ano as ano")->get();
+
+        return $cadeiras;
     }
 }

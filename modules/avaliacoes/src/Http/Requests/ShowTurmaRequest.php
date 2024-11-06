@@ -4,7 +4,7 @@ namespace Modules\Avaliacoes\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowAvaliacaoRequest extends FormRequest
+class ShowTurmaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class ShowAvaliacaoRequest extends FormRequest
     {
         return [
             //
-            'cursoId' => 'required|integer|exists:cursos,id',
-            'cadeiraId' => 'required|integer|exists:cadeiras,id',
-            'ano'=>['required','numeric','min:2000','max:3000','exists:turmas,ano'],
-            'nomeAvaliacao'=>'sometimes|string|exists:avaliacoes,nome_avaliacao',
-
+            'cursoId' => ['required', 'integer', 'exists:turmas,curso_id'],
+            'ano'=> ['sometimes', 'integer', 'exists:turmas,ano'],
+            'cadeiraId'=>['sometimes', 'integer', 'exists:turmas,cadeira_id'],
         ];
     }
 }
