@@ -24,6 +24,7 @@ class ShowMediaRequest extends FormRequest
         return [
             //
             "estudante_id" => "required|exists:estudantes,id",
+            "ano"=>"required|exists:turmas,ano",
 
 
         ];

@@ -2,6 +2,7 @@
 
 namespace Modules\Inscricao\Http\Controllers;
 
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Modules\Avaliacoes\Http\Resources\MediaResource;
 use Modules\Inscricao\Http\Requests\StoreMediaRequest;
@@ -104,12 +105,17 @@ class MediaController
             ->pluck('cadeira_id');
         //return $aprovadas;
 
+
         $cadeiras = DB::table('turmas')
             ->join('cadeiras', 'turmas.cadeira_id', '=', 'cadeiras.id')
+            ->join('cadeira_curso', function (JoinClause $join) {
+                $join->on('turmas.curso_id', '=', 'cadeira_curso.curso_id')->on('turmas.cadeira_id','=','cadeira_curso.cadeira_id');
+            })
             ->where('turmas.curso_id',$estudante->curso_id)
-            ->where('turmas.ano',gmdate("Y"))
+            ->where('turmas.ano',$campos["ano"])
             ->whereNotIn('turmas.cadeira_id',$aprovadas)
-            ->select("cadeiras.id as cadeiraId", "cadeiras.nome","turmas.ano as ano")->get();
+            ->select("cadeiras.id as cadeiraId", "cadeiras.nome","turmas.ano as ano","cadeira_curso.ano as ano","cadeira_curso.semestre as semestre")
+            ->get();
 
         return $cadeiras;
     }
