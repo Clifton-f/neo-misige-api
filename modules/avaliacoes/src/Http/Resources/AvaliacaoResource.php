@@ -34,6 +34,7 @@ class AvaliacaoResource extends JsonResource
                 'id'=>$cadeira->id,
                 'nome'=>$cadeira->nome
             ],
+            'nomeAvaliacao'=>$this->nome_avaliacao,
             'peso'=>$this->peso*100,
             "notas"=>$notas
         ];

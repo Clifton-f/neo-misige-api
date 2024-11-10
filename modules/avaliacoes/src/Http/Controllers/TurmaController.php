@@ -28,4 +28,5 @@ class TurmaController
             ->get();
         return $cadeiras;
     }
+
 }

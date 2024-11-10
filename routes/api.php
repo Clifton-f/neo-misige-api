@@ -83,10 +83,12 @@ Route::prefix('avaliacao')->group(function(){
     Route::put('/editarpesoavaliacao',[AvaliacaoControlerAvaliacao::class,'editarPeso']);
     Route::post('/veravaliacao',[AvaliacaoControlerAvaliacao::class,'show']);
     Route::post('/veravaliacoesturma',[AvaliacaoControlerAvaliacao::class,'index']);
+    Route::post('/veravaliacoescurso',[AvaliacaoControlerAvaliacao::class,'index']);
     Route::delete('eliminaravaliacao',[AvaliacaoControlerAvaliacao::class,'destroy']);
     Route::post('/veranos',[AvaliacaoTurmaController::class,'anosActivo']);
 
     Route::post('/verturmas',[AvaliacaoTurmaController::class,'showTurmas']);
+
 });
 
 Route::prefix('curso')->group(function(){

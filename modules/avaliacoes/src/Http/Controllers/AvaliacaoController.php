@@ -20,10 +20,19 @@ class AvaliacaoController
         //
 
         $campos = $request->validated();
-        $avaliacoes=Avaliacao::where('curso_id', $campos["cursoId"])
-            ->where('cadeira_id', $campos["cadeiraId"])->where('ano',$campos["ano"])->get();
+        if(array_key_exists('cadeiraId',$campos)){
+            $avaliacoes=Avaliacao::where('curso_id', $campos["cursoId"])
+                ->where('cadeira_id', $campos["cadeiraId"])->where('ano',$campos["ano"])->get();
 
             return new AvaliacaoCollection($avaliacoes);
+        }else{
+            $avaliacoes=Avaliacao::where('curso_id', $campos["cursoId"])
+                ->where('ano',$campos["ano"])->get();
+
+            return new AvaliacaoCollection($avaliacoes);
+        }
+
+
 
     }
 
@@ -137,6 +146,12 @@ class AvaliacaoController
             ->where('ano',$campos['ano'])->first();
 
         return new AvaliacaoResource($avaliacao);
+
+    }
+    public function avaliacaoCurso(ShowAvaliacaoRequest $request)
+    {
+        $campos = $request->validated();
+
 
     }
 }
