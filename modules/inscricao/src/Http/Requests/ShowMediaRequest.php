@@ -23,8 +23,8 @@ class ShowMediaRequest extends FormRequest
     {
         return [
             //
-            "estudante_id" => "required|exists:estudantes,id",
-            "ano"=>"required|exists:turmas,ano",
+            "estudanteId" => "required|exists:estudantes,numero_estudante",
+            "ano"=>"sometimes|exists:turmas,ano",
 
 
         ];
@@ -37,8 +37,8 @@ class ShowMediaRequest extends FormRequest
     }
     public function prepareForValidation(){
         return $this->merge([
-            "estudante_id"=>$this->estudanteId,
 
+            "ano"=>gmdate('Y')
         ]);
     }
 }

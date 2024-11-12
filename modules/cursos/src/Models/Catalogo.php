@@ -13,7 +13,9 @@ class Catalogo extends Model
         'curso_id',
         'cadeira_id',
         'ano',
-        'semestre'
+        'semestre',
+        'precedencia'
+
     ];
     public function curso(): BelongsTo{
         return $this->belongsTo(Curso::class);

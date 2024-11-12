@@ -27,6 +27,7 @@ class StoreCatalogoRequest extends FormRequest
         "cursoId"=>['required', 'integer', 'exists:curso,id'],
         "ano"=>['required', 'integer', 'min:1', 'max:1'],
         "semestre"=>['required', 'integer', 'min:1', 'max:1'],
+            "precedencia"=>['required', 'integer', 'min:1', 'max:1','exists:cadeiras,id'],
         ];
     }
 }

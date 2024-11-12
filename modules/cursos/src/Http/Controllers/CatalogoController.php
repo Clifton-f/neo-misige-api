@@ -22,6 +22,7 @@ class CatalogoController
             'curso_id' => $campos['cursoId'],
             "ano" => $campos['ano'],
             'semestre' => $campos['semestre'],
+            'precedencia'=>$campos['precedencia'],
         ]);
         $curso= new CursoResource(Curso::where('id',$campos["curso_id"])->first());
         return $curso->getCurso();

@@ -97,9 +97,9 @@ class MediaController
     }
     public function cadeiras(ShowMediaRequest $id){
         $campos = $id->validated();
-        $estudante=Estudante::where('id',$campos['estudante_id'])->first();
+        $estudante=Estudante::where('numero_estudante',$campos['estudanteId'])->first();
         //return $estudante;
-        $aprovadas = DB::table('medias')
+        $aprovadas = DB::table('medias')->join('estudantes','estudantes.id','=','medias.estudante_id')
             ->where('estudante_id',$estudante->id)
             ->where('media','>=10')
             ->pluck('cadeira_id');
@@ -112,7 +112,7 @@ class MediaController
                 $join->on('turmas.curso_id', '=', 'cadeira_curso.curso_id')->on('turmas.cadeira_id','=','cadeira_curso.cadeira_id');
             })
             ->where('turmas.curso_id',$estudante->curso_id)
-            ->where('turmas.ano',$campos["ano"])
+            ->where('turmas.ano',gmdate('Y'))
             ->whereNotIn('turmas.cadeira_id',$aprovadas)
             ->select("cadeiras.id as cadeiraId", "cadeiras.nome","turmas.ano as ano","cadeira_curso.ano as ano","cadeira_curso.semestre as semestre")
             ->get();
