@@ -23,8 +23,8 @@ class StoreCatalogoRequest extends FormRequest
     {
         return [
             //
-            "cadeiraId"=>['required', 'integer', 'exists:cadeira,id'],
-        "cursoId"=>['required', 'integer', 'exists:curso,id'],
+            "cadeiraId"=>['required', 'integer', 'exists:cadeiras,id'],
+        "cursoId"=>['required', 'integer', 'exists:cursos,id'],
         "ano"=>['required', 'integer', 'min:1', 'max:1'],
         "semestre"=>['required', 'integer', 'min:1', 'max:1'],
             "precedencia"=>['sometimes', 'integer', 'min:1', 'max:1','exists:cadeiras,id'],
