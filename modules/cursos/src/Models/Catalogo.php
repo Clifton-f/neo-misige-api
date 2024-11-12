@@ -14,9 +14,11 @@ class Catalogo extends Model
         'cadeira_id',
         'ano',
         'semestre',
-        'precedencia'
+        'precedencia',
+        "entrou_em_vigor"
 
     ];
+    public $timestamps = false;
     public function curso(): BelongsTo{
         return $this->belongsTo(Curso::class);
     }
