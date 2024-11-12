@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 // use Modules\Inscricao\Http\Controllers\InscricaoController;
 //use Modules\Inscricao\Http\Controllers\MediaController;

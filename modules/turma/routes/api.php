@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 // use Modules\Turma\Http\Controllers\TurmaController;
 
