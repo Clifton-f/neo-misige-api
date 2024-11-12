@@ -34,12 +34,12 @@ class StoreMediaRequest extends FormRequest
     public function prepareForValidation(){
         $ano = gmdate('Y');
         $estudante = Estudante::where('id',$this->estudanteId)->first();
-        return $this->merge([
-            "ano"=>$ano,
-            "cadeira_id"=>$this->cadeiraId,
-            "estudante_id"=>$this->estudanteId,
-            "curso_id"=>$estudante->curso_id,
-
-        ]);
+//        return $this->merge([
+//            "ano"=>$ano,
+//            "cadeira_id"=>$this->cadeiraId,
+//            "estudante_id"=>$this->estudanteId,
+//            "curso_id"=>$estudante->curso_id,
+//
+//        ]);
     }
 }
