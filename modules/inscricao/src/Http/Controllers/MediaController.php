@@ -44,9 +44,9 @@ class MediaController
 
         //
         $campos = $request->validated();
-        $estudante = Estudante::where('numero_estudante',$campos['estudante_id'])->first();
+        $estudante = Estudante::where('numero_estudante',$campos['estudanteId'])->first();
 
-        foreach ($campos['cadeira_id'] as $cadeira){
+        foreach ($campos['cadeiraId'] as $cadeira){
 
 
 
