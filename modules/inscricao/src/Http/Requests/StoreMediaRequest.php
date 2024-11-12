@@ -25,8 +25,8 @@ class StoreMediaRequest extends FormRequest
         return [
             //
             //"curso_id" => "required|exists:cursos,id",
-            "cadeira_id" => "required|exists:cadeiras,id",
-            "estudante_id" => "required|exists:estudantes,numero_estudante",
+            "cadeiraId" => "required|exists:cadeiras,id",
+            "estudanteId" => "required|exists:estudantes,numero_estudante",
 
         ];
     }
