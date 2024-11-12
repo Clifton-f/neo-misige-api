@@ -5,6 +5,7 @@ namespace Modules\Avaliacoes\Http\Controllers;
 use Modules\Avaliacoes\Http\Requests\UpdateAvaliacaoNotaRequest;
 use Modules\Avaliacoes\Http\Requests\StoreAvaliacaoNotaRequest;
 use Modules\Avaliacoes\Models\AvaliacaoNota;
+use Modules\Avaliacoes\Models\Estudante;
 
 class AvaliacaoNotaController
 {
@@ -55,10 +56,11 @@ class AvaliacaoNotaController
     {
         //
         $campos = $request->validated();
+        $estudante = Estudante::where('numero_estudante',$campos['numeroEstudante'])->first();
         $update=AvaliacaoNota::where('cadeira_id',$campos['cadeiraId'])
         ->where('curso_id',$campos['cursoId'])
         ->where('nome_avaliacao',$campos['nomeAvaliacao'])
-        ->where('estudante_id',$campos['estudanteId'])->where('ano',$campos['ano'])
+        ->where('estudante_id',$estudante->id)->where('ano',$campos['ano'])
         ->update([
             'nota'=>$campos['nota']
         ]);

@@ -26,7 +26,7 @@ class UpdateAvaliacaoNotaRequest extends FormRequest
             'cursoId'=>['required','exists:avaliacoes,curso_id'],
             'cadeiraId'=>['required','exists:avaliacoes,cadeira_id'],
             'nomeAvaliacao'=>['required','exists:avaliacoes,nome_avaliacao'],
-            'estudanteId'=>['required','exists:avaliacao_nota,estudante_id'],
+            'numeroEstudante'=>['required','exists:estudantes,numero_estudante'],
             'nota'=>['required','min:0','max:20'],
             'ano'=>['required','min:2000','max:3000','exists:avaliacoes,ano','integer'],
 
