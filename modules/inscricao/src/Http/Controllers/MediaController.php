@@ -44,19 +44,20 @@ class MediaController
 
         //
         $campos = $request->validated();
-
+        $estudante = Estudante::where('numero_estudante',$campos['estudante_id'])->first();
 
         foreach ($campos['cadeira_id'] as $cadeira){
 
 
+
            Media::create([
                'cadeira_id'=>$cadeira,
-               'curso_id'=>$campos['curso_id'],
-               'estudante_id'=>$campos['estudante_id'],
-               'ano'=>$campos['ano'],
+               'curso_id'=>$estudante->curso_id,
+               'estudante_id'=>$estudante->id,
+               'ano'=>gmdate("Y"),
            ]);
         }
-        $medias = Media::where('estudante_id', $campos['estudante_id'])->where('ano',$campos['ano'])->get();
+        $medias = Media::where('estudante_id', $estudante->id)->where('ano',gmdate("Y"))->get();
 
         return new MediaCollection($medias);
 

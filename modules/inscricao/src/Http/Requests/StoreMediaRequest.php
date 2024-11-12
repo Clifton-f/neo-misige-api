@@ -26,9 +26,8 @@ class StoreMediaRequest extends FormRequest
             //
             //"curso_id" => "required|exists:cursos,id",
             "cadeira_id" => "required|exists:cadeiras,id",
-            "estudante_id" => "required|exists:estudantes,id",
-            "curso_id" => "required|exists:cursos,id",
-            "ano" => "required",
+            "estudante_id" => "required|exists:estudantes,numero_estudante",
+
         ];
     }
     public function prepareForValidation(){
