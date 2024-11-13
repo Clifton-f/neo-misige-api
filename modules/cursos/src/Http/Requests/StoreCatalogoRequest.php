@@ -25,9 +25,9 @@ class StoreCatalogoRequest extends FormRequest
             //
             "cadeiraId"=>['required', 'integer', 'exists:cadeiras,id'],
         "cursoId"=>['required', 'integer', 'exists:cursos,id'],
-        "ano"=>['required', 'integer', 'min:1', 'max:1'],
-        "semestre"=>['required', 'integer', 'min:1', 'max:1'],
-            "precedencia"=>['sometimes', 'integer', 'min:1', 'max:1','exists:cadeiras,id'],
+        "ano"=>['required', 'integer', 'min:1', 'max:5'],
+        "semestre"=>['required', 'integer', 'min:1', 'max:2'],
+            "precedencia"=>['sometimes', 'integer','exists:cadeiras,id'],
         ];
     }
 }
