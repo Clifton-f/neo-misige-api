@@ -50,14 +50,19 @@ class AvaliacaoController
      */
     public function store(StoreAvaliacaoRequest $request)
     {
-        $campos = $request->validated();
-        $avaliacao=Avaliacao::create([
-            'curso_id' => $campos['cursoId'],
-            'cadeira_id' => $campos['cadeiraId'],
-            'nome_avaliacao' => $campos['nomeAvaliacao'],
-            'peso' => ($campos['peso']/100),
-            'ano' => $campos['ano'],
-        ]);
+        try {
+            $campos = $request->validated();
+            $avaliacao=Avaliacao::create([
+                'curso_id' => $campos['cursoId'],
+                'cadeira_id' => $campos['cadeiraId'],
+                'nome_avaliacao' => $campos['nomeAvaliacao'],
+                'peso' => ($campos['peso']/100),
+                'ano' => $campos['ano'],
+            ]);
+        }catch (\Illuminate\Database\QueryException $ex){
+
+        }
+
         return new AvaliacaoResource($avaliacao);
 
 
