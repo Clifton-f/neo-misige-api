@@ -67,6 +67,11 @@ class UserController
         $user->save();
         foreach ($campos['papel_id'] as $papel){
             if(UserPapel::where('user_id', $user->id)->where('papel_id', $papel)->count()==0){
+                try{
+
+                }catch (\Illuminate\Database\QueryException $ex){
+                    return $ex->getMessage();
+                }
                 UserPapel::create(["user_id" => $user->id, "papel_id" => $papel]);
             }
 

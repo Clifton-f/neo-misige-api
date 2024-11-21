@@ -24,20 +24,21 @@ class UpdatePapelRequest extends FormRequest
         $method = $this->method();
         if($method=='PUT'){
             return [
-                
+                'id'=>['required','integer','exists:papeis,id'],
                 'nome'=>['required','unique:papeis'],
-                
+
             ];
         }else{
             return [
+                'id'=>['required','integer','exists:papels,id'],
                 'nome'=>['sometimes','required','unique:papeis'],
-                
+
             ];
 
         }
         return [
             'nome'=>['required','unique:papeis'],
-            
+
         ];
     }
 }

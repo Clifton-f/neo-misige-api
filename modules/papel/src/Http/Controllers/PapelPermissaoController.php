@@ -35,19 +35,19 @@ class PapelPermissaoController
         //
         $campos=$request->validated();
         $papel=Papel::where('id',$campos['papel_id'])->first();
-        return new PapelResource($papel);
-        
+
+
         foreach($campos['permissoes'] as $permissao){
             PapelPermissao::create([
                 'papel_id'=>$campos['papel_id'],
                 'permissao_id'=>$permissao
             ]);
 
-            
-            
+
+
         }
         return new PapelResource($papel);
-        
+
     }
 
     /**

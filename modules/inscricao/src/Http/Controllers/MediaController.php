@@ -49,13 +49,17 @@ class MediaController
         foreach ($campos['cadeiraId'] as $cadeira){
 
 
+            try {
+                Media::create([
+                    'cadeira_id'=>$cadeira,
+                    'curso_id'=>$estudante->curso_id,
+                    'estudante_id'=>$estudante->id,
+                    'ano'=>gmdate("Y"),
+                ]);
+            }catch (\Illuminate\Database\QueryException $ex){
 
-           Media::create([
-               'cadeira_id'=>$cadeira,
-               'curso_id'=>$estudante->curso_id,
-               'estudante_id'=>$estudante->id,
-               'ano'=>gmdate("Y"),
-           ]);
+            }
+
         }
         $medias = Media::where('estudante_id', $estudante->id)->where('ano',gmdate("Y"))->get();
 
@@ -92,9 +96,16 @@ class MediaController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Media $media)
+    public function destroy(StoreMediaRequest $media)
     {
         //
+        $campos = $media->validated();
+        $inscricao = Media::where('estudante_id', $campos['estudanteId'])
+            ->where('cadeira_id', $campos['cadeiraId'])->first();
+
+        return $inscricao->delete();
+
+
     }
     public function cadeiras(ShowMediaRequest $id){
         $campos = $id->validated();
