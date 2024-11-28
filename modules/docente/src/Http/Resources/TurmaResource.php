@@ -93,10 +93,19 @@ class TurmaResource extends JsonResource
             $dadosEstudante = DB::table('estudantes')
                 ->join("users", "users.id",'=',"estudantes.id")
                 ->where('users.id',$media->estudante_id)->first();
-            $avaliacoes = DB::table('avaliacao_nota')->select('nome_avaliacao','nota')
+            $tempAvaliacoes = DB::table('avaliacao_nota')->select('nome_avaliacao','nota','peso')
                 ->where('estudante_id',$dadosEstudante->id)
                 ->where('curso_id',$this->curso_id)
                 ->where('cadeira_id',$this->cadeira_id)->where('ano',$this->ano)->get();
+            $avaliacoes=[];
+            foreach ($tempAvaliacoes as $avaliacao){
+                $avaliacoes[]=[
+                    "nomeAvaliacao"=>$avaliacao->nome_avaliacao,
+                    "nota"=>$avaliacao->nota,
+                    "peso"=>$avaliacao->peso*100,
+                ];
+
+            }
             $estudante= [
                 "numeroEstudante"=>$dadosEstudante->numero_estudante,
                 "nome"=>$dadosEstudante->nome,
