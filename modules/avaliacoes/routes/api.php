@@ -14,7 +14,6 @@ Route::prefix('avaliacao')->group(function(){
     Route::post('/veravaliacoescurso',[AvaliacaoController::class,'index']);
     Route::delete('eliminaravaliacao',[AvaliacaoController::class,'destroy']);
     Route::post('/veranos',[TurmaController::class,'anosActivo']);
-
     Route::post('/verturmas',[TurmaController::class,'showTurmas']);
 
 });

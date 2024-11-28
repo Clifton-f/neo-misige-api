@@ -26,6 +26,7 @@ class AvaliacaoResource extends JsonResource
             ->where('avaliacao_nota.curso_id',$this->curso_id)->where('avaliacao_nota.cadeira_id',$this->cadeira_id)
             ->where('avaliacao_nota.ano',$this->ano)
             ->get();
+
         return [
             "curso"=>[
                 'id'=>$curso->id,
@@ -36,7 +37,8 @@ class AvaliacaoResource extends JsonResource
             ],
             'nomeAvaliacao'=>$this->nome_avaliacao,
             'peso'=>$this->peso*100,
-            "notas"=>$notas
+            "notas"=>$notas,
+
         ];
     }
 }

@@ -27,7 +27,7 @@ class ShowNotasTurmaRequest extends FormRequest
             'cursoId' => 'required|exists:cursos,id',
             'ano'=>'required:exists:turmas,ano',
             'cadeiraId'=>'required:exists:cadeiras,id',
-            'nomeAvaliacao'=>'required:exists:avaliacoes,nome_avaliacao',
+            'nomeAvaliacao'=>'sometimes:exists:avaliacoes,nome_avaliacao',
 
         ];
     }
