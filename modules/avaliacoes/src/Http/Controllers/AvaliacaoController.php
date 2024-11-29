@@ -51,7 +51,39 @@ class AvaliacaoController
     public function store(StoreAvaliacaoRequest $request)
     {
         try {
+
             $campos = $request->validated();
+
+            if ($campos['peso']>100||$campos['peso']<0) {
+                return response(status: 422,content: [
+                    "message"=> "The peso field must be between 0 and 100",
+                    "errors"=> [
+                        "peso"=> [
+                            "The peso field must be between 0 and 100"
+                        ]
+                    ]
+                ]);
+            }
+            $pesoTotal = $campos['peso']/100;
+            $pesosAvaliacao = Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+                ->where('curso_id',$campos['cursoId'])
+                ->where('ano',$campos['ano'])->pluck('peso')->toArray();
+
+            $pesos=[];
+            foreach ($pesosAvaliacao as $peso) {
+                $pesoTotal += $peso;
+            }
+            if (1-$pesoTotal<0){
+
+                return response(status: 422,content: [
+                    "message"=> "The peso field must be between 0 and ".(($campos["peso"]/100+1-$pesoTotal)*100).".",
+                    "errors"=> [
+                        "peso"=> [
+                            "The peso field must be between 0 and 40"
+                        ]
+                    ]
+                ]);
+            }
             $avaliacao=Avaliacao::create([
                 'curso_id' => $campos['cursoId'],
                 'cadeira_id' => $campos['cadeiraId'],
@@ -59,11 +91,12 @@ class AvaliacaoController
                 'peso' => ($campos['peso']/100),
                 'ano' => $campos['ano'],
             ]);
+            return new AvaliacaoResource($avaliacao);
         }catch (\Illuminate\Database\QueryException $ex){
-
+response("Esse teste já existe", 402);
         }
 
-        return new AvaliacaoResource($avaliacao);
+
 
 
     }
@@ -101,12 +134,35 @@ class AvaliacaoController
         return ($request);
         $campos = $request->validated();
 
-        Avaliacao::where('cadeira_id',$campos['cadeiraId'])
-                        ->where('curso_id',$campos['cursoId'])
-                        ->where('nome_avaliacao',$campos['nomeAvaliacao'])
-                        ->where('ano',$campos['ano'])->update([
-                            "peso" => ($campos['peso']/100),
+        if ($campos['peso']>100||$campos['peso']<0) {
+            return response(status: 422,content: [
+                "message"=> "The peso field must be between 0 and 100",
+                "errors"=> [
+                    "peso"=> [
+                        "The peso field must be between 0 and 100"
+                    ]
+                ]
             ]);
+        }
+        $pesoTotal = $campos['peso']/100;
+        $pesosAvaliacao= Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+            ->where('curso_id',$campos['cursoId'])
+            ->where('ano',$campos['ano'])->pluck('peso')->toArray();
+        foreach ($pesosAvaliacao as $peso) {
+            $pesoTotal += $peso;
+        }
+dd(1-$pesoTotal);
+if (1-$pesoTotal<0){
+    return response(status: 422,content: [
+        "message"=> "The peso field must be between 0 and ",
+        "errors"=> [
+            "peso"=> [
+                "The peso field must be between 0 and 100"
+            ]
+        ]
+    ]);
+}
+
 
        $avaliacao= Avaliacao::where('cadeira_id',$campos['cadeiraId'])
            ->where('curso_id',$campos['cursoId'])
@@ -137,7 +193,36 @@ class AvaliacaoController
     {
 
         $campos = $request->validated();
+        if ($campos['peso']>100||$campos['peso']<0) {
+            return response(status: 422,content: [
+                "message"=> "The peso field must be between 0 and 100",
+                "errors"=> [
+                    "peso"=> [
+                        "The peso field must be between 0 and 100"
+                    ]
+                ]
+            ]);
+        }
+        $pesoTotal = $campos['peso']/100;
+        $pesosAvaliacao = Avaliacao::where('cadeira_id',$campos['cadeiraId'])
+            ->where('curso_id',$campos['cursoId'])->whereNot("nome_avaliacao",$campos['nomeAvaliacao'])
+            ->where('ano',$campos['ano'])->pluck('peso')->toArray();
 
+        $pesos=[];
+        foreach ($pesosAvaliacao as $peso) {
+            $pesoTotal += $peso;
+        }
+        if (1-$pesoTotal<0){
+
+            return response(status: 422,content: [
+                "message"=> "The peso field must be between 0 and ".(($campos["peso"]/100+1-$pesoTotal)*100).".",
+                "errors"=> [
+                    "peso"=> [
+                        "The peso field must be between 0 and 40"
+                    ]
+                ]
+            ]);
+        }
         Avaliacao::where('cadeira_id',$campos['cadeiraId'])
             ->where('curso_id',$campos['cursoId'])
             ->where('nome_avaliacao',$campos['nomeAvaliacao'])

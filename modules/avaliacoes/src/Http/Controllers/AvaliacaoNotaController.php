@@ -56,6 +56,17 @@ class AvaliacaoNotaController
     {
         //
         $campos = $request->validated();
+        if ($campos['nota']>20||$campos['nota']<0) {
+            return response(status: 422,content: [
+                "message"=> "The nota field must be between 0 and 2 characters.",
+    "errors"=> [
+                "nota"=> [
+                    "The nota field must be between 0 and 20"
+                ]
+    ]
+            ]);
+        }
+        return $campos;
         $estudante = Estudante::where('numero_estudante',$campos['numeroEstudante'])->first();
         $update=AvaliacaoNota::where('cadeira_id',$campos['cadeiraId'])
         ->where('curso_id',$campos['cursoId'])

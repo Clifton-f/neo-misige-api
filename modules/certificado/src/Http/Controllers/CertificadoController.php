@@ -16,4 +16,12 @@ class CertificadoController
 
         return new EstudanteResource($estudante);
     }
+
+    public function mostrarConclusaoCurso(ShowCertificadoRequest $request)
+    {
+        $campos = $request->validated();
+        $estudante = Estudante::where('numero_estudante',$campos['numeroEstudante'])->first();
+        $resource = new EstudanteResource($estudante);
+        return $resource->listarCadeirasFeitas();
+    }
 }
